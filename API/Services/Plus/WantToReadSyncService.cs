@@ -53,6 +53,7 @@ public class WantToReadSyncService : IWantToReadSyncService
 
             try
             {
+                // TODO: K+ can technically throw an exception when rate limit occurs or token is dead. We need to handle.
                 _logger.LogInformation("Syncing want to read for user: {UserName}", user.UserName);
                 var wantToReadSeries =
                     await (
