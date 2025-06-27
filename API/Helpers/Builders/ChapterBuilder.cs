@@ -39,9 +39,7 @@ public class ChapterBuilder : IEntityBuilder<Chapter>
 
         return builder.WithNumber(Parser.RemoveExtensionIfSupported(info.Chapters)!)
             .WithRange(specialTreatment ? info.Filename : info.Chapters)
-            .WithTitle(specialTreatment && info.Format is MangaFormat.Epub or MangaFormat.Pdf
-            ? info.Title
-            : specialTitle ?? string.Empty)
+            .WithTitle(info.Title ?? string.Empty) // NOTE: This originally had duplicate logic. I moved it further up int the pipeline.
             .WithIsSpecial(specialTreatment);
     }
 

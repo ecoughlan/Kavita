@@ -128,6 +128,7 @@ public abstract class DefaultParser(IDirectoryService directoryService) : IDefau
             info.IsSpecial = true;
             info.Chapters = Parser.DefaultChapter;
             info.Volumes = Parser.SpecialVolume;
+            info.Title = !string.IsNullOrEmpty(info.ComicInfo.Title) ? info.ComicInfo.Title : info.Title;
         }
 
         // Patch is SeriesSort from ComicInfo

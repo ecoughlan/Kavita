@@ -1412,6 +1412,8 @@ public class ExternalMetadataService : IExternalMetadataService
         }
 
         await DownloadSeriesCovers(series, externalMetadata.CoverUrl);
+
+
         return true;
     }
 

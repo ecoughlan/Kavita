@@ -972,4 +972,35 @@ public class ScannerServiceTests : AbstractDbTest
         Assert.Contains(postLib.Series, x => x.Name == "Immoral Guild");
         Assert.Contains(postLib.Series, x => x.Name == "Futoku No Guild");
     }
+
+    #region Just Parsing Tests
+    [Fact]
+    public async Task Special_WithTitle_HasTitleSet()
+    {
+        const string testcase = "Series with Just a Special - Manga.json";
+
+        // Get the first file and generate a ComicInfo
+        var infos = new Dictionary<string, ComicInfo>();
+        infos.Add("just a bunch of junk.cbz", new ComicInfo()
+        {
+            Series = "test",
+            Title = "Special Title",
+            Format = "Special"
+        });
+
+        var library = await _scannerHelper.GenerateScannerData(testcase, infos);
+
+        var scanner = _scannerHelper.CreateServices();
+        await scanner.ScanLibrary(library.Id);
+
+        var postLib = await UnitOfWork.LibraryRepository.GetLibraryForIdAsync(library.Id, LibraryIncludes.Series);
+
+        // Validate that there are 2 series
+        Assert.NotNull(postLib);
+
+
+        Assert.Equal("test", postLib.Series.First().Name);
+        Assert.Equal("Special Title", postLib.Series.First().Volumes[0].Chapters[0].Title);
+    }
+    #endregion
 }

@@ -188,7 +188,7 @@ public class Chapter : IEntityDate, IHasReadTimeEstimate, IHasCoverImage
             MinNumber = Parser.DefaultChapterNumber;
             MaxNumber = Parser.DefaultChapterNumber;
         }
-        Title = (IsSpecial && info.Format is MangaFormat.Epub or MangaFormat.Pdf)
+        Title = IsSpecial
             ? info.Title
             : Parser.RemoveExtensionIfSupported(Range);
 
