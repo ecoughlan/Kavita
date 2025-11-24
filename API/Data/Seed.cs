@@ -153,15 +153,7 @@ public static class Seed
     public static readonly ImmutableArray<SiteTheme> DefaultThemes = [
         ..new List<SiteTheme>
         {
-            new()
-            {
-                Name = "Dark",
-                NormalizedName = "Dark".ToNormalized(),
-                Provider = ThemeProvider.System,
-                FileName = "dark.scss",
-                IsDefault = true,
-                Description = "Default theme shipped with Kavita"
-            }
+            SiteTheme.DefaultTheme,
         }.ToArray()
     ];
 

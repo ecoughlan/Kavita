@@ -91,7 +91,7 @@ public interface IFontService
 public class FontService: IFontService
 {
 
-    public static readonly string DefaultFont = "Default";
+    public static readonly string DefaultFont = EpubFont.DefaultFont;
 
     private readonly IDirectoryService _directoryService;
     private readonly IUnitOfWork _unitOfWork;

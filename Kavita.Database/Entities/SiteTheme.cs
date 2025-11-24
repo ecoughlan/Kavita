@@ -1,8 +1,8 @@
-using System;
 using Kavita.Database.Entities.Enums.Theme;
 using Kavita.Database.Entities.Interfaces;
 
 namespace Kavita.Database.Entities;
+
 /// <summary>
 /// Represents a set of css overrides the user can upload to Kavita and will load into webui
 /// </summary>
@@ -62,4 +62,14 @@ public class SiteTheme : IEntityDate, ITheme
     public string CompatibleVersion { get; set; }
 
     #endregion
+
+    public static readonly SiteTheme DefaultTheme = new ()
+    {
+        Name = "Dark",
+        NormalizedName = "dark",
+        Provider = ThemeProvider.System,
+        FileName = "dark.scss",
+        IsDefault = true,
+        Description = "Default theme shipped with Kavita"
+    };
 }

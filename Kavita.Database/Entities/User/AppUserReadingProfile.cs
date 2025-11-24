@@ -108,7 +108,7 @@ public class AppUserReadingProfile
     /// <summary>
     /// Book Reader Option: Maps to the default Kavita font-family (inherit) or an override
     /// </summary>
-    public string BookReaderFontFamily { get; set; } = "Default"; // TODO: Fix
+    public string BookReaderFontFamily { get; set; } = EpubFont.DefaultFont;
     /// <summary>
     /// Book Reader Option: Allows tapping on side of screens to paginate
     /// </summary>

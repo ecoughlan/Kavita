@@ -138,15 +138,7 @@ public class AppUserPreferences
     /// UI Site Global Setting: The UI theme the user should use.
     /// </summary>
     /// <remarks>Should default to Dark</remarks>
-    public required SiteTheme Theme { get; set; } = new ()
-    {
-        Name = "Dark",
-        NormalizedName = "dark",
-        Provider = ThemeProvider.System,
-        FileName = "dark.scss",
-        IsDefault = true,
-        Description = "Default theme shipped with Kavita"
-    }; // TODO: Fix not having default
+    public required SiteTheme Theme { get; set; } = SiteTheme.DefaultTheme;
     /// <summary>
     /// Global Site Option: If the UI should layout items as Cards or List items
     /// </summary>

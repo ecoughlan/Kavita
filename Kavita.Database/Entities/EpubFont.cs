@@ -32,4 +32,6 @@ public class EpubFont: IEntityDate
     public DateTime CreatedUtc { get; set; }
     public DateTime LastModified { get; set; }
     public DateTime LastModifiedUtc { get; set; }
+
+    public const string DefaultFont = "Default";
 }
