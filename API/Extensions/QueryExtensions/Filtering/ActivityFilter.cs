@@ -1,6 +1,6 @@
 using System.Linq;
 using API.DTOs.Statistics;
-using API.Entities.Progress;
+using Kavita.Database.Entities.Progress;
 
 namespace API.Extensions.QueryExtensions.Filtering;
 

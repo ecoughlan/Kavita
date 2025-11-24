@@ -6,7 +6,7 @@ using API.Data;
 using API.Data.Repositories;
 using API.DTOs.Person;
 using API.DTOs.ReadingLists;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 using API.Helpers;
 using API.Middleware;

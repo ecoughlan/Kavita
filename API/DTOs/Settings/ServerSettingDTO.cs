@@ -1,5 +1,5 @@
 ﻿using System;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Services;
 
 namespace API.DTOs.Settings;

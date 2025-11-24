@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using API.Entities;
+using Kavita.Database.Entities;
 
 namespace API.DTOs.Statistics;
 

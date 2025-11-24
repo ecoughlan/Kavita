@@ -1,5 +1,5 @@
-﻿using API.Entities.Interfaces;
-using API.Entities.MetadataMatching;
+﻿using Kavita.Database.Entities.Interfaces;
+using Kavita.Database.Entities.MetadataMatching;
 
 namespace API.Extensions;
 

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.Data.Repositories;
-using API.Entities;
+using Kavita.Database.Entities;
 using API.Extensions;
 using API.Helpers;
 using API.Helpers.Builders;

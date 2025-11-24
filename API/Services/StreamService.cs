@@ -6,12 +6,13 @@ using API.Data;
 using API.Data.Repositories;
 using API.DTOs.Dashboard;
 using API.DTOs.SideNav;
-using API.Entities;
-using API.Entities.Enums;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
 using API.Helpers;
 using API.SignalR;
 using Kavita.Common;
 using Kavita.Common.Helpers;
+using Kavita.Database.Entities.User;
 using Microsoft.Extensions.Logging;
 
 namespace API.Services;

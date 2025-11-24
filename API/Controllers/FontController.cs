@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using API.Constants;
 using API.Data;
 using API.DTOs.Font;
-using API.Entities.Enums.Font;
+using Kavita.Database.Entities.Enums.Font;
 using API.Middleware;
 using API.Services;
 using API.Services.Tasks;

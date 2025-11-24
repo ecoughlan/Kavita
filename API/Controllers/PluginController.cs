@@ -3,7 +3,7 @@ using System.ComponentModel.DataAnnotations;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Middleware;
 using API.Services;
 using Kavita.Common;

@@ -1,5 +1,5 @@
 ﻿using System;
-using API.Entities.Metadata;
+using Kavita.Database.Entities.Metadata;
 
 namespace API.Helpers.Builders;
 

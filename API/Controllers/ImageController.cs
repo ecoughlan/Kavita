@@ -4,12 +4,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Constants;
 using API.Data;
-using API.Entities;
-using API.Entities.Enums;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 using API.Middleware;
 using API.Services;
 using API.Services.Tasks.Metadata;
+using Kavita.Database.Entities.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
@@ -31,7 +32,6 @@ public class ImageController : BaseApiController
     private readonly ILocalizationService _localizationService;
     private readonly IReadingListService _readingListService;
     private readonly ICoverDbService _coverDbService;
-    private readonly UserManager<AppUser> _userManager;
 
     /// <inheritdoc />
     public ImageController(IUnitOfWork unitOfWork, IDirectoryService directoryService,
@@ -43,7 +43,6 @@ public class ImageController : BaseApiController
         _localizationService = localizationService;
         _readingListService = readingListService;
         _coverDbService = coverDbService;
-        _userManager = userManager;
     }
 
     /// <summary>

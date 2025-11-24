@@ -1,7 +1,8 @@
 ﻿using System.Linq;
 using API.Data.Repositories;
-using API.Entities;
-using API.Entities.Person;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Person;
+using Kavita.Database.Entities.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions.QueryExtensions;

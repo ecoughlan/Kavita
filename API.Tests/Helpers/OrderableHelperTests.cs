@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using API.Entities;
+using Kavita.Database.Entities;
 using API.Helpers;
+using Kavita.Database.Entities.User;
 using Xunit;
 
 namespace API.Tests.Helpers;

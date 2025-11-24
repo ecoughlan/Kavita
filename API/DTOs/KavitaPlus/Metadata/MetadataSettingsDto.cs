@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using API.DTOs.Settings;
-using API.Entities.Enums;
-using API.Entities.MetadataMatching;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.MetadataMatching;
 
 namespace API.DTOs.KavitaPlus.Metadata;
 

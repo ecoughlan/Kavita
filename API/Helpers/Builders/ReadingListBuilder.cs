@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using API.Entities;
-using API.Entities.Enums;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 
 namespace API.Helpers.Builders;

@@ -1,4 +1,4 @@
-﻿using API.Entities;
+﻿using Kavita.Database.Entities;
 
 namespace API.DTOs.SideNav;
 #nullable enable

@@ -6,7 +6,7 @@ using API.Data;
 using API.DTOs.OPDS;
 using API.DTOs.OPDS.Requests;
 using API.DTOs.Progress;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Exceptions;
 using API.Extensions;
 using API.Middleware;

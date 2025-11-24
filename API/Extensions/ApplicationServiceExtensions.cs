@@ -13,6 +13,7 @@ using API.Services.Tasks.Scanner;
 using API.SignalR;
 using API.SignalR.Presence;
 using Kavita.Common;
+using Kavita.Database.Data;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.EntityFrameworkCore;

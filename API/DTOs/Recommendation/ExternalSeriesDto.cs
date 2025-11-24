@@ -1,4 +1,5 @@
 ﻿using API.Services.Plus;
+using Kavita.Database.Entities.Enums;
 
 namespace API.DTOs.Recommendation;
 #nullable enable

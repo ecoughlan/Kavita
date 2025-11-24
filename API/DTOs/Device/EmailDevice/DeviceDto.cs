@@ -1,4 +1,4 @@
-﻿using API.Entities.Enums.Device;
+﻿using Kavita.Database.Entities.Enums.Device;
 
 namespace API.DTOs.Device.EmailDevice;
 

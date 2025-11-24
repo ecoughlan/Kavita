@@ -3,6 +3,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs.Progress;
 using AutoMapper;
+using Kavita.Database.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data.Repositories;

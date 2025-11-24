@@ -8,10 +8,11 @@ using API.Data.Repositories;
 using API.DTOs.Annotations;
 using API.DTOs.Filtering;
 using API.DTOs.KavitaPlus.Manage;
-using API.Entities;
-using API.Entities.Enums;
-using API.Entities.Person;
-using API.Entities.Scrobble;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Person;
+using Kavita.Database.Entities.Scrobble;
+using Kavita.Database.Entities.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions.QueryExtensions;

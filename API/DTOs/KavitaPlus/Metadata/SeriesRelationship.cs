@@ -1,5 +1,5 @@
 ﻿using API.DTOs.Scrobbling;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Services.Plus;
 
 namespace API.DTOs.KavitaPlus.Metadata;

@@ -1,7 +1,7 @@
 using System;
 using System.Collections.Generic;
 using API.DTOs.Scrobbling;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 
 namespace API.Extensions;
 

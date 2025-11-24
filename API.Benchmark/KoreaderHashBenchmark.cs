@@ -2,7 +2,7 @@ using API.Helpers.Builders;
 using BenchmarkDotNet.Attributes;
 using BenchmarkDotNet.Order;
 using System;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 
 namespace API.Benchmark
 {

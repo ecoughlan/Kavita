@@ -1,6 +1,6 @@
 ﻿using System;
-using API.Entities.Enums;
-using API.Entities.Interfaces;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Interfaces;
 using API.Services.Plus;
 
 namespace API.DTOs.Collection;

@@ -8,7 +8,7 @@ using API.DTOs;
 using API.DTOs.Email;
 using API.DTOs.KavitaPlus.Metadata;
 using API.DTOs.Settings;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 using API.Helpers.Converters;
 using API.Services;

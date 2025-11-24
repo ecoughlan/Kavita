@@ -1,5 +1,5 @@
-﻿using API.Entities;
-using API.Entities.Enums.Device;
+﻿using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums.Device;
 
 namespace API.Helpers.Builders;
 

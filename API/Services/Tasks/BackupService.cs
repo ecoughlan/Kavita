@@ -5,7 +5,7 @@ using System.IO.Compression;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Logging;
 using API.SignalR;
 using Hangfire;

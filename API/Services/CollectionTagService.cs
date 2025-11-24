@@ -4,11 +4,13 @@ using System.Threading.Tasks;
 using API.Constants;
 using API.Data;
 using API.DTOs.Collection;
-using API.Entities;
+using Kavita.Database.Entities;
 using API.Extensions;
 using API.Services.Plus;
 using API.SignalR;
 using Kavita.Common;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.User;
 
 namespace API.Services;
 #nullable enable

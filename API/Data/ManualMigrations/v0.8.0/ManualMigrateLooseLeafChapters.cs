@@ -2,13 +2,15 @@
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Entities;
-using API.Entities.History;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.History;
 using API.Extensions;
 using API.Helpers.Builders;
 using API.Services;
 using API.Services.Tasks.Scanner.Parser;
 using Kavita.Common.EnvironmentInfo;
+using Kavita.Database.Data;
+using Kavita.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

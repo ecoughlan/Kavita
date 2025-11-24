@@ -7,7 +7,7 @@ using API.Data;
 using API.Data.Repositories;
 using API.DTOs.Collection;
 using API.DTOs.CollectionTags;
-using API.Entities;
+using Kavita.Database.Entities;
 using API.Helpers.Builders;
 using API.Middleware;
 using API.Services;
@@ -15,6 +15,8 @@ using API.Services.Plus;
 using API.SignalR;
 using Hangfire;
 using Kavita.Common;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.User;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 

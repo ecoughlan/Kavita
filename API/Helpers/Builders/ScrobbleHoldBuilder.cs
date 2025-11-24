@@ -1,4 +1,4 @@
-﻿using API.Entities.Scrobble;
+﻿using Kavita.Database.Entities.Scrobble;
 
 namespace API.Helpers.Builders;
 #nullable enable

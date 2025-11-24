@@ -11,7 +11,7 @@ using API.DTOs.Metadata;
 using API.DTOs.Metadata.Browse;
 using API.DTOs.Person;
 using API.DTOs.SeriesDetail;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 using API.Helpers;
 using API.Services;

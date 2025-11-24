@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 using API.DTOs.Statistics;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 
 namespace API.DTOs.Stats.V3.ClientDevice;
 

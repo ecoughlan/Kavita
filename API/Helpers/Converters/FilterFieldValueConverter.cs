@@ -2,7 +2,7 @@
 using System.Globalization;
 using System.Linq;
 using API.DTOs.Filtering.v2;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 
 namespace API.Helpers.Converters;

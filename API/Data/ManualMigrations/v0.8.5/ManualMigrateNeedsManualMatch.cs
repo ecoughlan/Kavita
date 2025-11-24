@@ -1,9 +1,10 @@
 ﻿using System;
 using System.Threading.Tasks;
 using API.DTOs.KavitaPlus.Manage;
-using API.Entities.History;
+using Kavita.Database.Entities.History;
 using API.Extensions.QueryExtensions;
 using Kavita.Common.EnvironmentInfo;
+using Kavita.Database.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

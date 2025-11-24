@@ -1,6 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
-using API.Entities.Interfaces;
+using Kavita.Database.Entities.Interfaces;
 using API.Extensions;
 using API.Services.Tasks.Scanner.Parser;
 

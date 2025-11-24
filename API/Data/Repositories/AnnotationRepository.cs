@@ -7,13 +7,15 @@ using API.DTOs.Filtering.v2;
 using API.DTOs.Metadata.Browse.Requests;
 using API.DTOs.Annotations;
 using API.DTOs.Reader;
-using API.Entities;
+using Kavita.Database.Entities;
 using API.Extensions.QueryExtensions;
 using API.Extensions.QueryExtensions.Filtering;
 using API.Helpers;
 using API.Helpers.Converters;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Kavita.Database.Data;
+using Kavita.Database.Entities.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data.Repositories;

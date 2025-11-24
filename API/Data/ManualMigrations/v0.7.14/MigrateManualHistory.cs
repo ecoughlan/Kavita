@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Threading.Tasks;
-using API.Entities.History;
+using Kavita.Database.Data;
+using Kavita.Database.Entities.History;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

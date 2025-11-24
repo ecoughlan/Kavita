@@ -1,5 +1,5 @@
 ﻿using System;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Services.Tasks.Scanner.Parser;
 
 namespace API.Extensions;

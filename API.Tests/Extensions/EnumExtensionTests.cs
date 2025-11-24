@@ -1,6 +1,6 @@
 #nullable enable
 using System;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 using Xunit;
 

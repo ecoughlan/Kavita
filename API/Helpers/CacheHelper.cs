@@ -1,6 +1,6 @@
 ﻿using System;
-using API.Entities;
-using API.Entities.Interfaces;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Interfaces;
 using API.Services;
 
 namespace API.Helpers;

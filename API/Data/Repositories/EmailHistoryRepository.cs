@@ -5,6 +5,7 @@ using API.DTOs.Email;
 using API.Helpers;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Kavita.Database.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data.Repositories;

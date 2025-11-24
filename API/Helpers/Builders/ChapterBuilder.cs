@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Globalization;
-using API.Entities;
-using API.Entities.Enums;
-using API.Entities.Person;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Person;
 using API.Services.Tasks.Scanner.Parser;
 
 namespace API.Helpers.Builders;

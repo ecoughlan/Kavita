@@ -1,10 +1,11 @@
 ﻿using System;
 using System.Globalization;
 using System.Linq;
-using API.Entities;
-using API.Entities.Enums;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
 using API.Services;
 using Kavita.Common.Extensions;
+using Kavita.Database.Entities;
 using Nager.ArticleNumber;
 
 namespace API.Data.Metadata;
@@ -134,9 +135,9 @@ public class ComicInfo
 
     public static AgeRating ConvertAgeRatingToEnum(string value)
     {
-        if (string.IsNullOrEmpty(value)) return Entities.Enums.AgeRating.Unknown;
+        if (string.IsNullOrEmpty(value)) return Kavita.Database.Entities.Enums.AgeRating.Unknown;
         return Enum.GetValues<AgeRating>()
-            .SingleOrDefault(t => t.ToDescription().ToUpperInvariant().Equals(value.ToUpperInvariant()), Entities.Enums.AgeRating.Unknown);
+            .SingleOrDefault(t => t.ToDescription().ToUpperInvariant().Equals(value.ToUpperInvariant()), Kavita.Database.Entities.Enums.AgeRating.Unknown);
     }
 
     public static void CleanComicInfo(ComicInfo? info)

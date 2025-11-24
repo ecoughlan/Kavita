@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using System.Linq;
-using API.Entities;
+using API.Extensions.EntityExtensions;
+using Kavita.Database.Entities;
 using API.Helpers;
 using API.Helpers.Builders;
 using API.Services.Tasks.Scanner.Parser;

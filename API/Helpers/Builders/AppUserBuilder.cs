@@ -1,8 +1,8 @@
 ﻿using System.Linq;
 using API.Data;
-using API.Entities;
-using API.Entities.Enums;
-using API.Entities.User;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.User;
 using Kavita.Common;
 
 namespace API.Helpers.Builders;

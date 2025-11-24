@@ -1,5 +1,5 @@
 using System.Collections.Generic;
-using API.Entities.Enums.Theme;
+using Kavita.Database.Entities.Enums.Theme;
 using API.Services;
 
 namespace API.DTOs.Theme;

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using API.Data;
 using API.Data.Metadata;
 using API.Data.Repositories;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Services;
 using API.Services.Tasks.Scanner;
 using API.Services.Tasks.Scanner.Parser;

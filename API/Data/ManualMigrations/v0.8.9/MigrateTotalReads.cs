@@ -2,9 +2,10 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Entities.History;
-using API.Entities.Progress;
+using Kavita.Database.Entities.History;
+using Kavita.Database.Entities.Progress;
 using Kavita.Common.EnvironmentInfo;
+using Kavita.Database.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

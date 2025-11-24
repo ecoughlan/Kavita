@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 using API.Constants;
 using API.Data;
 using API.DTOs.Reader;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Services;
 using Kavita.Common;
 using Microsoft.AspNetCore.Authorization;

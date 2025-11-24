@@ -4,10 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs.Metadata.Browse;
-using API.Entities;
-using API.Entities.Enums;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
 using API.Helpers;
 using API.Helpers.Builders;
+using Kavita.Database.Data;
+using Kavita.Database.Entities.User;
 using Xunit;
 using Xunit.Abstractions;
 

@@ -6,13 +6,14 @@ using API.DTOs;
 using API.DTOs.KavitaPlus.Manage;
 using API.DTOs.Recommendation;
 using API.DTOs.SeriesDetail;
-using API.Entities;
-using API.Entities.Enums;
-using API.Entities.Metadata;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Metadata;
 using API.Extensions.QueryExtensions;
 using API.Services.Plus;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Kavita.Database.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data.Repositories;

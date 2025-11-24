@@ -1,8 +1,8 @@
 ﻿using System;
 using System.Collections.Generic;
 using API.Data.Misc;
-using API.Entities.Enums;
-using API.Entities.Enums.Device;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Enums.Device;
 
 namespace API.DTOs.Stats.V3;
 

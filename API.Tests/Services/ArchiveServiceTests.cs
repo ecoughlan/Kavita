@@ -5,7 +5,7 @@ using System.IO.Abstractions.TestingHelpers;
 using System.IO.Compression;
 using System.Linq;
 using API.Archive;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Services;
 using Microsoft.Extensions.Logging;
 using NetVips;

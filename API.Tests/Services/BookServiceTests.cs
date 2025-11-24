@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.IO.Abstractions;
 using System.Threading.Tasks;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Services;
 using API.Services.Tasks.Scanner.Parser;
 using Microsoft.Extensions.Logging;

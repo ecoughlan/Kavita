@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 using API.Data;
 using API.Data.Repositories;
 using API.DTOs.KavitaPlus.Metadata;
-using API.Entities;
-using API.Entities.Enums;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 using Flurl.Http;
 using Hangfire;
 using Kavita.Common;
+using Kavita.Database.Entities.User;
 using Microsoft.Extensions.Logging;
 
 namespace API.Services.Plus;

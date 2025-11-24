@@ -1,7 +1,7 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Helpers;
 using API.Helpers.Builders;
 using Xunit;

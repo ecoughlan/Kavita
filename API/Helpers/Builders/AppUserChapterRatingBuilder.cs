@@ -1,7 +1,7 @@
 #nullable enable
 using System;
-using API.Entities;
-using API.Entities.User;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.User;
 
 namespace API.Helpers.Builders;
 

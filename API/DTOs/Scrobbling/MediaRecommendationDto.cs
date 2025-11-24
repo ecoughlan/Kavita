@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using API.Services.Plus;
+using Kavita.Database.Entities.Enums;
 
 namespace API.DTOs.Scrobbling;
 #nullable enable

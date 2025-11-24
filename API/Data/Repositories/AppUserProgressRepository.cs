@@ -4,12 +4,13 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using API.DTOs.Progress;
-using API.Entities.Enums;
-using API.Entities.Progress;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Progress;
 using API.Extensions.QueryExtensions;
 using API.Services.Tasks.Scanner.Parser;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Kavita.Database.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data.Repositories;

@@ -7,14 +7,16 @@ using API.DTOs;
 using API.DTOs.Filtering;
 using API.DTOs.JumpBar;
 using API.DTOs.Metadata;
-using API.Entities;
-using API.Entities.Enums;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 using API.Extensions.QueryExtensions;
 using API.Services.Tasks.Scanner.Parser;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
 using Kavita.Common.Extensions;
+using Kavita.Database.Data;
+using Kavita.Database.Entities.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data.Repositories;

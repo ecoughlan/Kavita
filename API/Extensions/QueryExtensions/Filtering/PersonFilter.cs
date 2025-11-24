@@ -2,9 +2,9 @@
 using System.Collections.Generic;
 using System.Linq;
 using API.DTOs.Filtering.v2;
-using API.Entities.Enums;
-using API.Entities.Person;
 using Kavita.Common;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Person;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions.QueryExtensions.Filtering;

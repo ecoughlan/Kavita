@@ -5,6 +5,7 @@ using API.Data.Repositories;
 using API.DTOs;
 using API.Services;
 using API.Services.Plus;
+using Kavita.Database.Entities.Enums;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;

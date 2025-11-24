@@ -7,12 +7,13 @@ using API.DTOs;
 using API.DTOs.Filtering;
 using API.DTOs.Filtering.v2;
 using API.DTOs.WantToRead;
-using API.Entities;
+using Kavita.Database.Entities;
 using API.Extensions;
 using API.Helpers;
 using API.Services;
 using API.Services.Plus;
 using Hangfire;
+using Kavita.Database.Entities.User;
 using Microsoft.AspNetCore.Mvc;
 
 namespace API.Controllers;

@@ -1,4 +1,5 @@
-﻿using API.Entities.Metadata;
+﻿using Kavita.Database.Data;
+using Kavita.Database.Entities.Metadata;
 
 namespace API.Data.Repositories;
 

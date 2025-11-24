@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using API.DTOs.Filtering;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 using Xunit;
 

@@ -1,7 +1,8 @@
 ﻿using System.Linq;
 using System.Threading.Tasks;
-using API.Entities;
-using API.Entities.Enums;
+using Kavita.Database.Data;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

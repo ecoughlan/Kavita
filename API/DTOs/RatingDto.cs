@@ -1,5 +1,5 @@
-﻿using API.Entities.Enums;
-using API.Entities.Metadata;
+﻿using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Metadata;
 using API.Services.Plus;
 
 namespace API.DTOs;

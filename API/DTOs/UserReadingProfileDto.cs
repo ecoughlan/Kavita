@@ -1,7 +1,9 @@
 using System.ComponentModel.DataAnnotations;
-using API.Entities;
-using API.Entities.Enums;
-using API.Entities.Enums.UserPreferences;
+using API.Data.Migrations;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Enums.UserPreferences;
+using Kavita.Database.Entities.User;
 
 namespace API.DTOs;
 
@@ -16,47 +18,47 @@ public sealed record UserReadingProfileDto
 
     #region MangaReader
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.ReadingDirection"/>
+    /// <inheritdoc cref="Kavita.Database.Entities.Enums.ReadingDirection"/>
     [Required]
     public ReadingDirection ReadingDirection { get; set; }
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.ScalingOption"/>
+    /// <inheritdoc cref="Kavita.Database.Entities.Enums.ScalingOption"/>
     [Required]
     public ScalingOption ScalingOption { get; set; }
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.PageSplitOption"/>
+    /// <inheritdoc cref="Kavita.Database.Entities.Enums.PageSplitOption"/>
     [Required]
     public PageSplitOption PageSplitOption { get; set; }
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.ReaderMode"/>
+    /// <inheritdoc cref="Kavita.Database.Entities.Enums.ReaderMode"/>
     [Required]
     public ReaderMode ReaderMode { get; set; }
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.AutoCloseMenu"/>
+    /// <inheritdoc cref="AppUserReadingProfile.AutoCloseMenu"/>
     [Required]
     public bool AutoCloseMenu { get; set; }
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.ShowScreenHints"/>
+    /// <inheritdoc cref="AppUserReadingProfile.ShowScreenHints"/>
     [Required]
     public bool ShowScreenHints { get; set; } = true;
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.EmulateBook"/>
+    /// <inheritdoc cref="AppUserReadingProfile.EmulateBook"/>
     [Required]
     public bool EmulateBook { get; set; }
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.LayoutMode"/>
+    /// <inheritdoc cref="Kavita.Database.Entities.Enums.LayoutMode"/>
     [Required]
     public LayoutMode LayoutMode { get; set; }
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.BackgroundColor"/>
+    /// <inheritdoc cref="AppUserReadingProfile.BackgroundColor"/>
     [Required]
     public string BackgroundColor { get; set; } = "#000000";
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.SwipeToPaginate"/>
+    /// <inheritdoc cref="AppUserReadingProfile.SwipeToPaginate"/>
     [Required]
     public bool SwipeToPaginate { get; set; }
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.AllowAutomaticWebtoonReaderDetection"/>
+    /// <inheritdoc cref="AppUserReadingProfile.AllowAutomaticWebtoonReaderDetection"/>
     [Required]
     public bool AllowAutomaticWebtoonReaderDetection { get; set; }
 
@@ -70,31 +72,31 @@ public sealed record UserReadingProfileDto
 
     #region EpubReader
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.BookReaderMargin"/>
+    /// <inheritdoc cref="AppUserReadingProfile.BookReaderMargin"/>
     [Required]
     public int BookReaderMargin { get; set; }
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.BookReaderLineSpacing"/>
+    /// <inheritdoc cref="AppUserReadingProfile.BookReaderLineSpacing"/>
     [Required]
     public int BookReaderLineSpacing { get; set; }
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.BookReaderFontSize"/>
+    /// <inheritdoc cref="AppUserReadingProfile.BookReaderFontSize"/>
     [Required]
     public int BookReaderFontSize { get; set; }
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.BookReaderFontFamily"/>
+    /// <inheritdoc cref="AppUserReadingProfile.BookReaderFontFamily"/>
     [Required]
     public string BookReaderFontFamily { get; set; } = null!;
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.BookReaderTapToPaginate"/>
+    /// <inheritdoc cref="AppUserReadingProfile.BookReaderTapToPaginate"/>
     [Required]
     public bool BookReaderTapToPaginate { get; set; }
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.BookReaderReadingDirection"/>
+    /// <inheritdoc cref="AppUserReadingProfile.BookReaderReadingDirection"/>
     [Required]
     public ReadingDirection BookReaderReadingDirection { get; set; }
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.BookReaderWritingStyle"/>
+    /// <inheritdoc cref="AppUserReadingProfile.BookReaderWritingStyle"/>
     [Required]
     public WritingStyle BookReaderWritingStyle { get; set; }
 
@@ -102,11 +104,11 @@ public sealed record UserReadingProfileDto
     [Required]
     public string BookReaderThemeName { get; set; } = null!;
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.BookReaderLayoutMode"/>
+    /// <inheritdoc cref="AppUserReadingProfile.BookReaderLayoutMode"/>
     [Required]
     public BookPageLayoutMode BookReaderLayoutMode { get; set; }
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.BookReaderImmersiveMode"/>
+    /// <inheritdoc cref="Data.Migrations.BookReaderImmersiveMode"/>
     [Required]
     public bool BookReaderImmersiveMode { get; set; } = false;
 
@@ -114,15 +116,15 @@ public sealed record UserReadingProfileDto
 
     #region PdfReader
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.PdfTheme"/>
+    /// <inheritdoc cref="Kavita.Database.Entities.Enums.UserPreferences.PdfTheme"/>
     [Required]
     public PdfTheme PdfTheme { get; set; } = PdfTheme.Dark;
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.PdfScrollMode"/>
+    /// <inheritdoc cref="Kavita.Database.Entities.Enums.UserPreferences.PdfScrollMode"/>
     [Required]
     public PdfScrollMode PdfScrollMode { get; set; } = PdfScrollMode.Vertical;
 
-    /// <inheritdoc cref="API.Entities.AppUserReadingProfile.PdfSpreadMode"/>
+    /// <inheritdoc cref="Kavita.Database.Entities.Enums.UserPreferences.PdfSpreadMode"/>
     [Required]
     public PdfSpreadMode PdfSpreadMode { get; set; } = PdfSpreadMode.None;
 

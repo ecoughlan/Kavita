@@ -1,10 +1,12 @@
 using System;
 using System.Threading.Tasks;
-using API.Entities;
-using API.Entities.Enums;
-using API.Entities.History;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.History;
 using API.Extensions;
 using Kavita.Common.EnvironmentInfo;
+using Kavita.Database.Data;
+using Kavita.Database.Entities.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using API.Data.Misc;
-using API.Entities;
-using API.Entities.Enums;
-using API.Entities.Person;
-using API.Entities.User;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Person;
+using Kavita.Database.Entities.User;
 
 namespace API.Extensions.QueryExtensions;
 #nullable enable

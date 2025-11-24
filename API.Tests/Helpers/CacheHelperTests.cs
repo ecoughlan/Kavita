@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.IO.Abstractions.TestingHelpers;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Helpers;
 using API.Helpers.Builders;
 using API.Services;

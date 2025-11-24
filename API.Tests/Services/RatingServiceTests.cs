@@ -2,7 +2,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Data.Repositories;
 using API.DTOs;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Helpers.Builders;
 using API.Services;
 using API.Services.Plus;

@@ -1,7 +1,7 @@
 ﻿using System.IO;
 using System.Linq;
 using System.Text;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Services;
 using NetVips;
 using Xunit;

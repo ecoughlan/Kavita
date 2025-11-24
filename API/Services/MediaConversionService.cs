@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Comparators;
 using API.Data;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 using API.SignalR;
 using Hangfire;

@@ -1,5 +1,5 @@
 ﻿using API.Data.Metadata;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using Xunit;
 
 namespace API.Tests.Entities;

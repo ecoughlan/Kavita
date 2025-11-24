@@ -1,6 +1,6 @@
 using System.Linq;
 using API.Data.Metadata;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 
 namespace API.Services.Tasks.Scanner.Parser;
 #nullable enable

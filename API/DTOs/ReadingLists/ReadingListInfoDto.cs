@@ -1,4 +1,4 @@
-﻿using API.Entities.Interfaces;
+﻿using Kavita.Database.Entities.Interfaces;
 
 namespace API.DTOs.ReadingLists;
 

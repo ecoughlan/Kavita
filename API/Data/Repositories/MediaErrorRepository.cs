@@ -2,9 +2,10 @@
 using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs.MediaErrors;
-using API.Entities;
+using Kavita.Database.Entities;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Kavita.Database.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data.Repositories;

@@ -4,7 +4,7 @@ using System.Linq;
 using API.Data.ManualMigrations;
 using API.DTOs.Filtering;
 using API.DTOs.Filtering.v2;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Helpers;
 using Xunit;
 

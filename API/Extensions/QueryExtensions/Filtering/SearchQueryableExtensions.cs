@@ -2,9 +2,10 @@
 using System.Linq;
 using API.Data.Misc;
 using API.Data.Repositories;
-using API.Entities;
-using API.Entities.Metadata;
-using API.Entities.Person;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Metadata;
+using Kavita.Database.Entities.Person;
+using Kavita.Database.Entities.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions.QueryExtensions.Filtering;

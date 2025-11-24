@@ -2,7 +2,7 @@
 
 using System.Collections.Generic;
 using System.Security.Claims;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 
 namespace API.DTOs.Settings;
 

@@ -3,9 +3,11 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs.Device;
 using API.DTOs.Device.EmailDevice;
-using API.Entities;
+using Kavita.Database.Entities;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Kavita.Database.Data;
+using Kavita.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data.Repositories;

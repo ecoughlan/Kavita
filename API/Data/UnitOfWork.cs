@@ -1,8 +1,9 @@
 ﻿using System;
 using System.Threading.Tasks;
 using API.Data.Repositories;
-using API.Entities;
 using AutoMapper;
+using Kavita.Database.Data;
+using Kavita.Database.Entities.User;
 using Microsoft.AspNetCore.Identity;
 
 namespace API.Data;

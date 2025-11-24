@@ -7,12 +7,13 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Linq;
 using API.Comparators;
-using API.Entities;
-using API.Entities.Progress;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Progress;
 using API.Extensions;
 using API.Services.Reading;
 using API.Services.Tasks.Scanner.Parser;
 using AutoMapper;
+using Kavita.Database.Entities.User;
 using Microsoft.Extensions.Logging;
 
 namespace API.Services;

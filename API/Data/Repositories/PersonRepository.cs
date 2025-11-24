@@ -8,8 +8,8 @@ using API.DTOs.Filtering.v2;
 using API.DTOs.Metadata.Browse;
 using API.DTOs.Metadata.Browse.Requests;
 using API.DTOs.Person;
-using API.Entities.Enums;
-using API.Entities.Person;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Person;
 using API.Extensions;
 using API.Extensions.QueryExtensions;
 using API.Extensions.QueryExtensions.Filtering;
@@ -17,6 +17,7 @@ using API.Helpers;
 using API.Helpers.Converters;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Kavita.Database.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data.Repositories;

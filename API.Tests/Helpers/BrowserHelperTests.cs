@@ -1,5 +1,5 @@
 using API.Constants;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Helpers;
 using Xunit;
 

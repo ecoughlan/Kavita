@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
-using API.Entities;
+using Kavita.Database.Entities;
 
 namespace API.Helpers.Builders;
 

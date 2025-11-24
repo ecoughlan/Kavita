@@ -9,7 +9,7 @@ using System.Xml.Linq;
 using System.Xml.Serialization;
 using API.Archive;
 using API.Data.Metadata;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 using API.Services.Tasks;
 using Kavita.Common;

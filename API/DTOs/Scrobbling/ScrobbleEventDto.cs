@@ -1,4 +1,5 @@
 ﻿using System;
+using Kavita.Database.Entities.Enums;
 
 namespace API.DTOs.Scrobbling;
 #nullable enable

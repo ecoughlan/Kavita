@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using API.DTOs.Scrobbling;
-using API.Entities;
+using Kavita.Database.Entities;
 using API.Extensions;
 using API.Services.Plus;
 

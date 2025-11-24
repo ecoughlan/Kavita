@@ -9,11 +9,12 @@ using API.Data;
 using API.Data.Repositories;
 using API.DTOs.Annotations;
 using API.DTOs.Reader;
-using API.Entities;
+using Kavita.Database.Entities;
 using API.Helpers;
 using API.SignalR;
 using HtmlAgilityPack;
 using Kavita.Common;
+using Kavita.Database.Entities.User;
 using Microsoft.Extensions.Logging;
 
 namespace API.Services;

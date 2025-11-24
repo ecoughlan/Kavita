@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using API.Entities;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.User;
 
 namespace API.Helpers;
 #nullable enable

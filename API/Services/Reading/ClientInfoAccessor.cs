@@ -1,6 +1,6 @@
 ﻿using System.Threading;
-using API.Entities.Progress;
-using API.Entities.User;
+using Kavita.Database.Entities.Progress;
+using Kavita.Database.Entities.User;
 
 namespace API.Services.Reading;
 #nullable enable

@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using API.DTOs.Theme;
-using API.Entities;
-using API.Entities.Enums.UserPreferences;
-using API.Entities.User;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums.UserPreferences;
+using Kavita.Database.Entities.User;
 
 namespace API.DTOs;
 #nullable enable

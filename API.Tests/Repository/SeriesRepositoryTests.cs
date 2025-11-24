@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using API.Data;
-using API.Entities.Enums;
-using API.Entities.Metadata;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Metadata;
 using API.Helpers.Builders;
 using Xunit;
 using Xunit.Abstractions;

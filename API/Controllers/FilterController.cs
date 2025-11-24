@@ -7,10 +7,11 @@ using API.Data;
 using API.Data.Repositories;
 using API.DTOs.Dashboard;
 using API.DTOs.Filtering.v2;
-using API.Entities;
+using Kavita.Database.Entities;
 using API.Helpers;
 using API.Middleware;
 using API.Services;
+using Kavita.Database.Entities.User;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 

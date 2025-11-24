@@ -3,12 +3,13 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs.KavitaPlus.Metadata;
 using API.DTOs.Settings;
-using API.Entities;
-using API.Entities.Enums;
-using API.Entities.Metadata;
-using API.Entities.MetadataMatching;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Metadata;
+using Kavita.Database.Entities.MetadataMatching;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Kavita.Database.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data.Repositories;

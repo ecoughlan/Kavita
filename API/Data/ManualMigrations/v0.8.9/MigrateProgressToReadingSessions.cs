@@ -2,12 +2,14 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Entities;
-using API.Entities.Enums;
-using API.Entities.History;
-using API.Entities.Progress;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.History;
+using Kavita.Database.Entities.Progress;
 using API.Services.Reading;
 using Kavita.Common.EnvironmentInfo;
+using Kavita.Database.Data;
+using Kavita.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

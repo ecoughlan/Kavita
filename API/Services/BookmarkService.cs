@@ -5,11 +5,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs.Reader;
-using API.Entities;
-using API.Entities.Enums;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 using Hangfire;
 using Kavita.Common;
+using Kavita.Database.Entities.User;
 using Microsoft.Extensions.Logging;
 
 namespace API.Services;

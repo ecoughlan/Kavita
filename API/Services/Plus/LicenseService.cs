@@ -4,7 +4,7 @@ using System.Threading.Tasks;
 using API.Constants;
 using API.Data;
 using API.DTOs.KavitaPlus.License;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 using API.Services.Tasks;
 using EasyCaching.Core;

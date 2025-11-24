@@ -1,8 +1,8 @@
 using System;
 using System.Threading.Tasks;
 using API.Constants;
-using API.Entities.Enums;
-using API.Entities.Progress;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Progress;
 using API.Middleware;
 using API.Services.Reading;
 using API.Services.Store;

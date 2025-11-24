@@ -6,13 +6,15 @@ using API.DTOs;
 using API.DTOs.Metadata;
 using API.DTOs.Reader;
 using API.DTOs.SeriesDetail;
-using API.Entities;
-using API.Entities.Enums;
-using API.Entities.Metadata;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Metadata;
 using API.Extensions;
 using API.Extensions.QueryExtensions;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Kavita.Database.Data;
+using Kavita.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data.Repositories;

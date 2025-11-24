@@ -3,11 +3,12 @@ using System.Globalization;
 using System.IO;
 using System.Linq;
 using System.Threading.Tasks;
-using API.Entities.History;
+using Kavita.Database.Entities.History;
 using API.Services;
 using CsvHelper;
 using CsvHelper.Configuration.Attributes;
 using Kavita.Common.EnvironmentInfo;
+using Kavita.Database.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

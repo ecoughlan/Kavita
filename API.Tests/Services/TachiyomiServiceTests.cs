@@ -1,6 +1,7 @@
 ﻿using API.Helpers.Builders;
 using API.Services.Plus;
 using API.Services.Reading;
+using Kavita.Database.Entities.User;
 using Xunit.Abstractions;
 
 namespace API.Tests.Services;
@@ -9,8 +10,8 @@ using System.IO.Abstractions.TestingHelpers;
 using System.Threading.Tasks;
 using Data;
 using Data.Repositories;
-using API.Entities;
-using API.Entities.Enums;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
 using API.Services;
 using SignalR;
 using AutoMapper;

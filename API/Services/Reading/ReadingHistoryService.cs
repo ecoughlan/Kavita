@@ -3,8 +3,9 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs.Progress;
-using API.Entities.Progress;
+using Kavita.Database.Entities.Progress;
 using Hangfire;
+using Kavita.Database.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
@@ -108,7 +109,7 @@ public class ReadingHistoryService : IReadingHistoryService
                 }
             }
 
-            var dailyData = new DailyReadingDataDto
+            var dailyData = new DailyReadingData
             {
                 TotalMinutesRead = totalMinutes,
                 TotalPagesRead = totalPages,

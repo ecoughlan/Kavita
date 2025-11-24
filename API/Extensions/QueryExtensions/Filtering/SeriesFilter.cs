@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Linq;
 using API.DTOs.Filtering.v2;
-using API.Entities;
-using API.Entities.Enums;
+using Kavita.Database.Entities;
 using API.Services.Tasks.Scanner.Parser;
 using Kavita.Common;
+using Kavita.Database.Entities.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions.QueryExtensions.Filtering;

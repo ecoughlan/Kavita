@@ -1,4 +1,4 @@
-﻿using API.Entities.Progress;
+﻿using Kavita.Database.Entities.Progress;
 using Kavita.Common;
 
 namespace API.Services.Store;

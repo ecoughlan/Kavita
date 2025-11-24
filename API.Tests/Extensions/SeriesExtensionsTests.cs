@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using API.Comparators;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 using API.Helpers.Builders;
 using API.Services.Tasks.Scanner.Parser;

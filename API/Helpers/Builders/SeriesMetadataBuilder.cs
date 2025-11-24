@@ -1,9 +1,9 @@
 ﻿using System;
 using System.Collections.Generic;
-using API.Entities;
-using API.Entities.Enums;
-using API.Entities.Metadata;
-using API.Entities.Person;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Metadata;
+using Kavita.Database.Entities.Person;
 
 namespace API.Helpers.Builders;
 

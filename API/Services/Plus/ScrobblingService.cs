@@ -9,10 +9,10 @@ using API.Data;
 using API.Data.Repositories;
 using API.DTOs.Filtering;
 using API.DTOs.Scrobbling;
-using API.Entities;
-using API.Entities.Enums;
-using API.Entities.Metadata;
-using API.Entities.Scrobble;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Metadata;
+using Kavita.Database.Entities.Scrobble;
 using API.Extensions;
 using API.Helpers;
 using API.Services.Tasks.Scanner.Parser;
@@ -21,27 +21,12 @@ using Flurl.Http;
 using Hangfire;
 using Kavita.Common;
 using Kavita.Common.Helpers;
+using Kavita.Database.Entities.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 
 namespace API.Services.Plus;
 #nullable enable
-
-/// <summary>
-/// Misleading name but is the source of data (like a review coming from AniList)
-/// </summary>
-public enum ScrobbleProvider
-{
-    /// <summary>
-    /// For now, this means data comes from within this instance of Kavita
-    /// </summary>
-    Kavita = 0,
-    AniList = 1,
-    Mal = 2,
-    [Obsolete("No longer supported")]
-    GoogleBooks = 3,
-    Cbr = 4
-}
 
 public interface IScrobblingService
 {

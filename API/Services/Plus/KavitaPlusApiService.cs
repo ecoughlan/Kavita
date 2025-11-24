@@ -7,7 +7,7 @@ using API.DTOs.KavitaPlus.ExternalMetadata;
 using API.DTOs.KavitaPlus.Metadata;
 using API.DTOs.Metadata.Matching;
 using API.DTOs.Scrobbling;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 using Flurl.Http;
 using Kavita.Common;

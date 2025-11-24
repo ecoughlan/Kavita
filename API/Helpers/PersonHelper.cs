@@ -3,10 +3,10 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs;
-using API.Entities;
-using API.Entities.Enums;
-using API.Entities.Metadata;
-using API.Entities.Person;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Metadata;
+using Kavita.Database.Entities.Person;
 using API.Extensions;
 using API.Helpers.Builders;
 

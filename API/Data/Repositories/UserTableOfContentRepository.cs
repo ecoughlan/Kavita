@@ -2,9 +2,11 @@
 using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs.Reader;
-using API.Entities;
+using Kavita.Database.Entities;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Kavita.Database.Data;
+using Kavita.Database.Entities.User;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data.Repositories;

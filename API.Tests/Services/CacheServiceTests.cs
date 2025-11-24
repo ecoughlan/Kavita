@@ -3,7 +3,7 @@ using System.IO.Abstractions.TestingHelpers;
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data.Metadata;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Helpers.Builders;
 using API.Services;
 using API.Services.Tasks.Scanner.Parser;

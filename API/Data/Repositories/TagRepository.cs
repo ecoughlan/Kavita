@@ -3,13 +3,14 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs.Metadata;
 using API.DTOs.Metadata.Browse;
-using API.Entities;
+using Kavita.Database.Entities;
 using API.Extensions;
 using API.Extensions.QueryExtensions;
 using API.Helpers;
 using API.Services.Tasks.Scanner.Parser;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Kavita.Database.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data.Repositories;

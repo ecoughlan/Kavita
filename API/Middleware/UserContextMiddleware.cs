@@ -3,7 +3,7 @@ using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Threading.Tasks;
 using API.Data;
-using API.Entities.Progress;
+using Kavita.Database.Entities.Progress;
 using API.Services;
 using API.Services.Store;
 using Microsoft.AspNetCore.Authorization;
@@ -57,7 +57,7 @@ public class UserContextMiddleware(RequestDelegate next, ILogger<UserContextMidd
             {
                 // No user resolved on a protected endpoint - this is a problem
                 // Authorization middleware will handle returning 401/403
-                logger.LogWarning("Could not resolve user identity for protected endpoint: {Path}", context.Request.Path);
+                //logger.LogWarning("Could not resolve user identity for protected endpoint: {Path}", context.Request.Path);
             }
             else
             {

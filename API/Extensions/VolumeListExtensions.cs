@@ -3,8 +3,8 @@ using System.Collections.Generic;
 using System.Linq;
 using API.Comparators;
 using API.DTOs;
-using API.Entities;
-using API.Entities.Enums;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
 using API.Services.Tasks.Scanner.Parser;
 
 namespace API.Extensions;

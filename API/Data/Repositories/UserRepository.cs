@@ -12,14 +12,15 @@ using API.DTOs.Reader;
 using API.DTOs.Scrobbling;
 using API.DTOs.SeriesDetail;
 using API.DTOs.SideNav;
-using API.Entities;
-using API.Entities.User;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.User;
 using API.Extensions;
 using API.Extensions.QueryExtensions;
 using API.Extensions.QueryExtensions.Filtering;
 using API.Helpers;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Kavita.Database.Data;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
 

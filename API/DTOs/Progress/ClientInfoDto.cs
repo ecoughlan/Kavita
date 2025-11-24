@@ -1,6 +1,6 @@
 ﻿using API.Constants;
-using API.Entities.Enums;
-using API.Entities.Progress;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Progress;
 
 namespace API.DTOs.Progress;
 #nullable enable

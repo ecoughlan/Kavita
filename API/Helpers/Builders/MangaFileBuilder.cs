@@ -1,7 +1,7 @@
 ﻿using System;
 using System.IO;
-using API.Entities;
-using API.Entities.Enums;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
 using API.Services.Tasks.Scanner.Parser;
 
 namespace API.Helpers.Builders;

@@ -6,11 +6,12 @@ using API.Data;
 using API.DTOs.Device;
 using API.DTOs.Device.EmailDevice;
 using API.DTOs.Email;
-using API.Entities;
-using API.Entities.Enums;
-using API.Entities.Enums.Device;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Enums.Device;
 using API.Helpers.Builders;
 using Kavita.Common;
+using Kavita.Database.Entities.User;
 using Microsoft.Extensions.Logging;
 
 namespace API.Services;

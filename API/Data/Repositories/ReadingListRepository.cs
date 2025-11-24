@@ -4,14 +4,15 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs.Person;
 using API.DTOs.ReadingLists;
-using API.Entities;
-using API.Entities.Enums;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 using API.Extensions.QueryExtensions;
 using API.Helpers;
 using API.Services;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Kavita.Database.Data;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data.Repositories;
@@ -60,7 +61,7 @@ public interface IReadingListRepository
     Task<ReadingListItemDto?> GetContinueReadingPoint(int readingListId, int userId);
 }
 
-public class ReadingListRepository : IReadingListRepository
+public class @ReadingListRepository : IReadingListRepository
 {
     private readonly DataContext _context;
     private readonly IMapper _mapper;

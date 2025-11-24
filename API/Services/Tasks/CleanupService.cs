@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 using API.Data;
 using API.Data.Repositories;
 using API.DTOs.Filtering;
-using API.Entities;
-using API.Entities.Enums;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
 using API.Helpers;
 using API.Services.Tasks.Scanner.Parser;
 using API.SignalR;
 using Hangfire;
+using Kavita.Database.Entities.User;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

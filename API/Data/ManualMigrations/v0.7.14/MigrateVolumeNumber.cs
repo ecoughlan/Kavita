@@ -1,5 +1,6 @@
 ﻿using System.Threading.Tasks;
 using API.Services.Tasks.Scanner.Parser;
+using Kavita.Database.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

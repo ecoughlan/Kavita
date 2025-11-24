@@ -1,6 +1,6 @@
 ﻿using System.Linq;
-using API.Entities;
-using API.Entities.Person;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Person;
 
 namespace API.Extensions.QueryExtensions;
 

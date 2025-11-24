@@ -8,7 +8,7 @@ using API.DTOs;
 using API.DTOs.Metadata.Browse;
 using API.DTOs.Metadata.Browse.Requests;
 using API.DTOs.Person;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 using API.Helpers;
 using API.Services;

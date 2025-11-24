@@ -1,4 +1,4 @@
-﻿using API.Entities.Person;
+﻿using Kavita.Database.Entities.Person;
 using API.Extensions;
 
 namespace API.Helpers.Builders;

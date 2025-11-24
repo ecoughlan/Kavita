@@ -3,9 +3,9 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
 using API.Data.Misc;
-using API.Entities;
-using API.Entities.Enums;
-using API.Entities.Metadata;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Metadata;
 
 namespace API.Extensions;
 #nullable enable

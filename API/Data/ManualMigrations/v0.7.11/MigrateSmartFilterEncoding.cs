@@ -3,9 +3,10 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using System.Threading.Tasks;
 using API.DTOs.Filtering.v2;
-using API.Entities.History;
+using Kavita.Database.Entities.History;
 using API.Helpers;
 using Kavita.Common.EnvironmentInfo;
+using Kavita.Database.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

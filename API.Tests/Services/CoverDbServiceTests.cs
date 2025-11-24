@@ -3,7 +3,7 @@ using System.Reflection;
 using System.Threading.Tasks;
 using API.Constants;
 using API.Data;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 using API.Services;
 using API.Services.Tasks.Metadata;

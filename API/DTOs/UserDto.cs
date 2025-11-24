@@ -2,9 +2,9 @@
 using System;
 using System.Collections.Generic;
 using API.DTOs.Account;
-using API.Entities;
-using API.Entities.Enums;
-using API.Entities.Interfaces;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Interfaces;
 using NotImplementedException = System.NotImplementedException;
 
 namespace API.DTOs;

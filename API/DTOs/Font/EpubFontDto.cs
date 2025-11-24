@@ -1,4 +1,4 @@
-using API.Entities.Enums.Font;
+using Kavita.Database.Entities.Enums.Font;
 
 namespace API.DTOs.Font;
 

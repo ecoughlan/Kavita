@@ -1,4 +1,6 @@
-﻿namespace API.DTOs.Scrobbling;
+﻿using Kavita.Database.Entities.Enums;
+
+namespace API.DTOs.Scrobbling;
 #nullable enable
 
 /// <summary>

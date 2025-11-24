@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using API.DTOs.Scrobbling;
+using Kavita.Database.Entities.Enums;
 
 namespace API.DTOs.KavitaPlus.ExternalMetadata;
 #nullable enable

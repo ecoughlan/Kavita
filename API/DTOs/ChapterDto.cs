@@ -2,8 +2,8 @@
 using System.Collections.Generic;
 using API.DTOs.Metadata;
 using API.DTOs.Person;
-using API.Entities.Enums;
-using API.Entities.Interfaces;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Interfaces;
 
 namespace API.DTOs;
 #nullable enable

@@ -3,11 +3,13 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using API.DTOs.Scrobbling;
-using API.Entities.Scrobble;
+using Kavita.Database.Entities.Scrobble;
 using API.Extensions.QueryExtensions;
 using API.Helpers;
 using AutoMapper;
 using AutoMapper.QueryableExtensions;
+using Kavita.Database.Data;
+using Kavita.Database.Entities.Enums;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Data.Repositories;

@@ -9,7 +9,7 @@ using API.DTOs.Jobs;
 using API.DTOs.MediaErrors;
 using API.DTOs.Stats;
 using API.DTOs.Update;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Helpers;
 using API.Services;
 using API.Services.Tasks;

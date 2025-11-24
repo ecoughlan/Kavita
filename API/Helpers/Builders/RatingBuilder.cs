@@ -1,6 +1,7 @@
 ﻿#nullable enable
 using System;
-using API.Entities;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.User;
 
 namespace API.Helpers.Builders;
 
@@ -25,7 +26,7 @@ public class RatingBuilder : IEntityBuilder<AppUserRating>
         _rating.Rating = Math.Clamp(rating, 0, 5);
         return this;
     }
-    
+
 
     public RatingBuilder WithBody(string body)
     {

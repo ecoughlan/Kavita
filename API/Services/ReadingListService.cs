@@ -10,8 +10,8 @@ using API.Data;
 using API.Data.Repositories;
 using API.DTOs.ReadingLists;
 using API.DTOs.ReadingLists.CBL;
-using API.Entities;
-using API.Entities.Enums;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 using API.Helpers;
 using API.Helpers.Builders;
@@ -19,6 +19,7 @@ using API.Services.Reading;
 using API.Services.Tasks.Scanner.Parser;
 using API.SignalR;
 using Kavita.Common;
+using Kavita.Database.Entities.User;
 using Microsoft.Extensions.Logging;
 
 namespace API.Services;

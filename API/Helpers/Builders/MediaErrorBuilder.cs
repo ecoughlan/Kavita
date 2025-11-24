@@ -1,5 +1,5 @@
 ﻿using System.IO;
-using API.Entities;
+using Kavita.Database.Entities;
 using API.Services.Tasks.Scanner.Parser;
 
 namespace API.Helpers.Builders;

@@ -6,12 +6,13 @@ using System.Threading.Tasks;
 using API.Data;
 using API.Data.Metadata;
 using API.Data.Repositories;
-using API.Entities;
-using API.Entities.Enums;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 using API.Services.Tasks.Scanner.Parser;
 using API.Tests.Helpers;
 using Hangfire;
+using Kavita.Database.Data;
 using Xunit;
 using Xunit.Abstractions;
 

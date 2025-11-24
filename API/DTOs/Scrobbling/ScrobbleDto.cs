@@ -1,38 +1,9 @@
 ﻿using System;
 using System.ComponentModel;
+using Kavita.Database.Entities.Enums;
 
 namespace API.DTOs.Scrobbling;
 #nullable enable
-
-public enum ScrobbleEventType
-{
-    [Description("Chapter Read")]
-    ChapterRead = 0,
-    [Description("Add to Want to Read")]
-    AddWantToRead = 1,
-    [Description("Remove from Want to Read")]
-    RemoveWantToRead = 2,
-    [Description("Score Updated")]
-    ScoreUpdated = 3,
-    [Description("Review Added/Updated")]
-    Review = 4
-}
-
-/// <summary>
-/// Represents PlusMediaFormat
-/// </summary>
-public enum PlusMediaFormat
-{
-    [Description("Manga")]
-    Manga = 1,
-    [Description("Comic")]
-    Comic = 2,
-    [Description("LightNovel")]
-    LightNovel = 3,
-    [Description("Book")]
-    Book = 4,
-    Unknown = 5
-}
 
 
 public sealed record ScrobbleDto

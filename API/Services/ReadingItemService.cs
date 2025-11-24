@@ -1,6 +1,6 @@
 ﻿using System;
 using API.Data.Metadata;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Services.Tasks.Scanner.Parser;
 using Microsoft.Extensions.Logging;
 

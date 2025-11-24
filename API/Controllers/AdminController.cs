@@ -1,7 +1,7 @@
 ﻿using System.Threading.Tasks;
 using API.Constants;
-using API.Entities;
 using API.Middleware;
+using Kavita.Database.Entities.User;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;

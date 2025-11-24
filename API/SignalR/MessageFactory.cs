@@ -1,9 +1,10 @@
 ﻿using System;
 using API.DTOs.Reader;
 using API.DTOs.Update;
-using API.Entities.Person;
+using Kavita.Database.Entities.Person;
 using API.Extensions;
 using API.Services.Plus;
+using Kavita.Database.Entities.Enums;
 
 namespace API.SignalR;
 

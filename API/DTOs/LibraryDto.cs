@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using API.Entities;
-using API.Entities.Enums;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
 
 namespace API.DTOs;
 #nullable enable

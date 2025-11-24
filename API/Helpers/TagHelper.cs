@@ -5,7 +5,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
 using API.DTOs.Metadata;
-using API.Entities;
+using Kavita.Database.Entities;
 using API.Extensions;
 using API.Helpers.Builders;
 using API.Services.Tasks.Scanner.Parser;

@@ -2,8 +2,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data;
-using API.Entities;
-using API.Entities.Enums.Theme;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums.Theme;
 using API.Extensions;
 using API.Services;
 using API.Services.Tasks;

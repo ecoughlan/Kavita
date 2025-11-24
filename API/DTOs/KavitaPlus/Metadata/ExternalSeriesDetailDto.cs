@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using API.DTOs.Recommendation;
 using API.DTOs.Scrobbling;
 using API.Services.Plus;
+using Kavita.Database.Entities.Enums;
 
 namespace API.DTOs.KavitaPlus.Metadata;
 #nullable enable

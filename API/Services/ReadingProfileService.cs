@@ -5,12 +5,13 @@ using System.Threading.Tasks;
 using API.Data;
 using API.Data.Repositories;
 using API.DTOs;
-using API.Entities;
-using API.Entities.Enums;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 using API.Helpers.Builders;
 using AutoMapper;
 using Kavita.Common;
+using Kavita.Database.Entities.User;
 
 namespace API.Services;
 #nullable enable

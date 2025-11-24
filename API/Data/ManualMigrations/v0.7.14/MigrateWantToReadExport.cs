@@ -4,6 +4,7 @@ using System.IO;
 using System.Threading.Tasks;
 using API.Services;
 using CsvHelper;
+using Kavita.Database.Data;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Logging;
 

@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
-using API.Entities;
-using API.Entities.Enums;
+using Kavita.Database.Entities;
+using Kavita.Database.Entities.Enums;
 using API.Extensions;
 using API.Services.Tasks.Scanner;
 using API.Services.Tasks.Scanner.Parser;

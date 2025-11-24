@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
-using API.Entities;
+using Kavita.Database.Entities;
 using Microsoft.AspNetCore.StaticFiles;
 using MimeTypes;
 

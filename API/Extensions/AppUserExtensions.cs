@@ -1,8 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
 using API.Data.Misc;
-using API.Entities;
+using Kavita.Database.Entities;
 using API.Helpers;
+using Kavita.Database.Entities.User;
 
 namespace API.Extensions;
 #nullable enable

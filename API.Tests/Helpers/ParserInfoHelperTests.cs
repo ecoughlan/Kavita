@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 using API.Helpers;
 using API.Helpers.Builders;
 using API.Services.Tasks.Scanner;

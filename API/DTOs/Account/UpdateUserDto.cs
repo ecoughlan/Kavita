@@ -1,5 +1,5 @@
 ﻿using System.Collections.Generic;
-using API.Entities.Enums;
+using Kavita.Database.Entities.Enums;
 
 namespace API.DTOs.Account;
 #nullable enable

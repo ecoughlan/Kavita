@@ -1,6 +1,6 @@
 ﻿using System.Linq;
 using API.DTOs.Filtering;
-using API.Entities;
+using Kavita.Database.Entities;
 using Microsoft.EntityFrameworkCore;
 
 namespace API.Extensions.QueryExtensions.Filtering;

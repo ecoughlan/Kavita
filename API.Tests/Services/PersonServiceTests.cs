@@ -1,8 +1,8 @@
 using System.Linq;
 using System.Threading.Tasks;
 using API.Data.Repositories;
-using API.Entities.Enums;
-using API.Entities.Person;
+using Kavita.Database.Entities.Enums;
+using Kavita.Database.Entities.Person;
 using API.Extensions;
 using API.Helpers.Builders;
 using API.Services;
