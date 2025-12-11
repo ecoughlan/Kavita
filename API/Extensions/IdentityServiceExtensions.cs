@@ -15,6 +15,7 @@ using Kavita.Common;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
@@ -140,15 +141,24 @@ public static class IdentityServiceExtensions
 
         auth.AddScheme<AuthKeyAuthenticationOptions, AuthKeyAuthenticationHandler>(
             AuthKeyAuthenticationOptions.SchemeName,
-            options => { });
+            options =>
+            {
 
+            });
 
-        services.AddAuthorizationBuilder()
-            .AddPolicy(PolicyGroups.AdminPolicy, policy => policy.RequireRole(PolicyConstants.AdminRole))
-            .AddPolicy(PolicyGroups.DownloadPolicy,
-                policy => policy.RequireRole(PolicyConstants.DownloadRole, PolicyConstants.AdminRole))
-            .AddPolicy(PolicyGroups.ChangePasswordPolicy,
-                policy => policy.RequireRole(PolicyConstants.ChangePasswordRole, PolicyConstants.AdminRole));
+       services.AddAuthorizationBuilder()
+           .SetDefaultPolicy(new AuthorizationPolicyBuilder()
+               .RequireAuthenticatedUser()
+               .Build())
+           .AddPolicy(PolicyGroups.AdminPolicy, policy => policy
+               .RequireAuthenticatedUser()
+               .RequireRole(PolicyConstants.AdminRole))
+           .AddPolicy(PolicyGroups.DownloadPolicy, policy => policy
+               .RequireAuthenticatedUser()
+               .RequireRole(PolicyConstants.DownloadRole, PolicyConstants.AdminRole))
+           .AddPolicy(PolicyGroups.ChangePasswordPolicy, policy => policy
+               .RequireAuthenticatedUser()
+               .RequireRole(PolicyConstants.ChangePasswordRole, PolicyConstants.AdminRole));
 
         return services;
     }

@@ -1,6 +1,4 @@
-﻿using API.Middleware;
-using API.Services.Store;
-using Microsoft.AspNetCore.Authentication.JwtBearer;
+﻿using API.Services.Store;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.DependencyInjection;
@@ -12,7 +10,6 @@ namespace API.Controllers;
 [Authorize]
 [ApiController]
 [Route("api/[controller]")]
-//[Authorize(AuthenticationSchemes = $"{JwtBearerDefaults.AuthenticationScheme},{AuthKeyAuthenticationOptions.SchemeName}")]
 public class BaseApiController : ControllerBase
 {
     /// <summary>
@@ -32,5 +29,6 @@ public class BaseApiController : ControllerBase
     /// </summary>
     /// <remarks>Warning! Username's can contain .. and /, do not use folders or filenames explicitly with the Username</remarks>
     protected string? Username => UserContext.GetUsername();
+
 
 }

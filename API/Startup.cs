@@ -337,6 +337,24 @@ public class Startup
             }
         });
 
+        app.Use(async (context, next) =>
+        {
+            await next();
+
+            // Log after the request completes
+            if (context.Response.StatusCode == 403)
+            {
+                var logger = context.RequestServices.GetRequiredService<ILogger<Program>>();
+                logger.LogWarning(
+                    "403 on {Path} - IsAuthenticated: {IsAuth}, AuthType: {AuthType}, Claims: {Claims}",
+                    context.Request.Path,
+                    context.User.Identity?.IsAuthenticated,
+                    context.User.Identity?.AuthenticationType,
+                    string.Join(", ", context.User.Claims.Select(c => $"{c.Type}={c.Value}"))
+                );
+            }
+        });
+
         app.UseAuthentication();
         app.UseAuthorization();
 

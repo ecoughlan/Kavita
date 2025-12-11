@@ -27,7 +27,6 @@ public class AuthKeyAuthenticationHandler : AuthenticationHandler<AuthKeyAuthent
 {
 private readonly IUnitOfWork _unitOfWork;
     private readonly HybridCache _cache;
-    private readonly UserManager<AppUser> _userManager;
 
     private static readonly HybridCacheEntryOptions CacheOptions = new()
     {
@@ -40,13 +39,11 @@ private readonly IUnitOfWork _unitOfWork;
         ILoggerFactory logger,
         UrlEncoder encoder,
         IUnitOfWork unitOfWork,
-        HybridCache cache,
-        UserManager<AppUser>  userManager)
+        HybridCache cache)
         : base(options, logger, encoder)
     {
         _unitOfWork = unitOfWork;
         _cache = cache;
-        _userManager = userManager;
     }
 
     protected override async Task<AuthenticateResult> HandleAuthenticateAsync()

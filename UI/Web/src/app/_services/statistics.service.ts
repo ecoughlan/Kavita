@@ -3,7 +3,7 @@ import {inject, Injectable} from '@angular/core';
 import {environment} from 'src/environments/environment';
 import {UserReadStatistics} from '../statistics/_models/user-read-statistics';
 import {PublicationStatusPipe} from '../_pipes/publication-status.pipe';
-import {asyncScheduler, map} from 'rxjs';
+import {asyncScheduler, forkJoin, map} from 'rxjs';
 import {MangaFormatPipe} from '../_pipes/manga-format.pipe';
 import {FileExtensionBreakdown} from '../statistics/_models/file-breakdown';
 import {TopUserRead} from '../statistics/_models/top-reads';
@@ -53,6 +53,15 @@ export class StatisticsService {
   translocoService = inject(TranslocoService);
   publicationStatusPipe = new PublicationStatusPipe();
   mangaFormatPipe = new MangaFormatPipe();
+
+  test() {
+    return forkJoin([
+      this.httpClient.get<any>(this.baseUrl + 'debugauth/anon'),
+      this.httpClient.get<any>(this.baseUrl + 'debugauth/basic-auth'),
+      this.httpClient.get<any>(this.baseUrl + 'debugauth/admin-policy'),
+      this.httpClient.get<any>(this.baseUrl + 'debugauth/manual-check'),
+    ])
+  }
 
   getUserStatistics(userId: number, libraryIds: Array<number> = []) {
     const url = `${this.baseUrl}stats/user/${userId}/read`;

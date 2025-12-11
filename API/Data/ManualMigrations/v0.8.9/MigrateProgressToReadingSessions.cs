@@ -34,7 +34,7 @@ public class MigrateProgressToReadingSessions : ManualMigration
 
         if (isEpub && chapter.WordCount > 0 && chapter.Pages > 0)
         {
-            totalWordsRead = (int)Math.Round(chapter.WordCount * (progress.PagesRead / (1.0f * chapter.Pages)));
+            totalWordsRead = (int) Math.Round(chapter.WordCount * (progress.PagesRead / (1.0f * chapter.Pages)));
         }
 
         // NOTE: I'm seeing a lot of off by 1 pages read issues here
@@ -79,11 +79,11 @@ public class MigrateProgressToReadingSessions : ManualMigration
     }
 
     protected override string MigrationName => nameof(MigrateProgressToReadingSessions);
-    protected override async Task ExecuteAsync(DataContext dataContext, ILogger<Program> logger)
+    protected override async Task ExecuteAsync(DataContext context, ILogger<Program> logger)
     {
         try
         {
-            var totalProgressRecords = await dataContext.AppUserProgresses.CountAsync();
+            var totalProgressRecords = await context.AppUserProgresses.CountAsync();
             if (totalProgressRecords > 0)
             {
                 logger.LogInformation("Found {Count} progress records to migrate", totalProgressRecords);
@@ -94,17 +94,17 @@ public class MigrateProgressToReadingSessions : ManualMigration
                 for (var batchNumber = 0; batchNumber < totalBatches; batchNumber++)
                 {
                     // Join with Chapter to get TotalPages and WordCount
-                    var progressBatch = await dataContext.AppUserProgresses
+                    var progressBatch = await context.AppUserProgresses
                         .AsNoTracking()
                         .Where(p => p.PagesRead > 0)
                         .OrderBy(p => p.Id)
                         .Skip(batchNumber * BatchSize)
                         .Take(BatchSize)
-                        .Join(dataContext.Chapter,
+                        .Join(context.Chapter,
                             p => p.ChapterId,
                             c => c.Id,
                             (progress, chapter) => new { Progress = progress, Chapter = chapter })
-                        .Join(dataContext.Series,
+                        .Join(context.Series,
                             p => p.Progress.SeriesId,
                             s => s.Id,
                             (combo, series) => new {combo.Progress, combo.Chapter, series.Format })
@@ -152,8 +152,8 @@ public class MigrateProgressToReadingSessions : ManualMigration
 
                     if (sessions.Count > 0)
                     {
-                        await dataContext.AppUserReadingSession.AddRangeAsync(sessions);
-                        await dataContext.SaveChangesAsync();
+                        await context.AppUserReadingSession.AddRangeAsync(sessions);
+                        await context.SaveChangesAsync();
                         migratedCount += sessions.Count;
                     }
 

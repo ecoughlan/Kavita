@@ -122,6 +122,10 @@ export class ProfileComponent {
     this.location.replaceState(newUrl) // TODO: Look into making this a directive for tabs
   }
 
+  test() {
+    this.statsService.test().subscribe(res => {})
+  }
+
 
 
 
