@@ -17,6 +17,8 @@ public class MigrateMissingAppUserRatingDateColumns : ManualMigration
 
     protected override async Task ExecuteAsync(DataContext context, ILogger<Program> logger)
     {
+        if (!context.Database.IsSqlite()) return;
+
         logger.LogDebug("Checking for missing date columns on AppUserRating table");
 
         // Check which columns are missing

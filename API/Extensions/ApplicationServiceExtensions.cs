@@ -1,8 +1,8 @@
-﻿using System.IO.Abstractions;
+﻿using System;
+using System.IO.Abstractions;
 using API.Constants;
 using API.Data;
 using API.Helpers;
-using API.Middleware;
 using API.Services;
 using API.Services.Caching;
 using API.Services.Plus;
@@ -108,7 +108,7 @@ public static class ApplicationServiceExtensions
         services.AddSingleton<IReadingSessionService, ReadingSessionService>();
         services.AddSingleton<IClientInfoAccessor, ClientInfoAccessor>();
 
-        services.AddSqLite();
+        services.AddDatabases(config);
         services.AddSignalR(opt => opt.EnableDetailedErrors = true);
 
         services.AddEasyCaching(options =>
@@ -141,20 +141,43 @@ public static class ApplicationServiceExtensions
         });
     }
 
-    private static void AddSqLite(this IServiceCollection services)
+    private static void AddDatabases(this IServiceCollection services, IConfiguration configuration)
     {
         services.AddSqliteCache("config/cache.db");
 
-        services.AddDbContextPool<DataContext>(options =>
+        var psql = configuration.GetConnectionString("psql");
+
+        if (string.IsNullOrEmpty(psql))
         {
-            options.UseSqlite("Data source=config/kavita.db", builder =>
+            services.AddDbContextPool<DataContext>(options =>
             {
-                builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+                options.UseSqlite("Data source=config/kavita.db", builder =>
+                {
+                    builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+                });
+                options.EnableDetailedErrors();
+                options.EnableSensitiveDataLogging();
+                options.ConfigureWarnings(warnings =>
+                    warnings.Ignore(RelationalEventId.PendingModelChangesWarning));
             });
-            options.EnableDetailedErrors();
-            options.EnableSensitiveDataLogging();
-            options.ConfigureWarnings(warnings =>
-                warnings.Ignore(RelationalEventId.PendingModelChangesWarning));
-        });
+        }
+        else
+        {
+            // We store DateTimeKind.Local in database, so need this enabled
+            AppContext.SetSwitch("Npgsql.EnableLegacyTimestampBehavior", true);
+
+            services.AddDbContextPool<PostgresDataContext>(options =>
+            {
+                options.UseNpgsql(psql, builder =>
+                {
+                    builder.UseQuerySplittingBehavior(QuerySplittingBehavior.SplitQuery);
+                });
+                options.EnableDetailedErrors();
+                options.EnableSensitiveDataLogging();
+                options.ConfigureWarnings(warnings =>
+                    warnings.Ignore(RelationalEventId.PendingModelChangesWarning));
+            });
+            services.AddScoped<DataContext>(sp => sp.GetRequiredService<PostgresDataContext>());
+        }
     }
 }

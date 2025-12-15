@@ -75,15 +75,22 @@ public class Program
                 var isDbCreated = await context.Database.CanConnectAsync();
                 if (isDbCreated && pendingMigrations.Any())
                 {
-                    logger.LogInformation("Performing backup as migrations are needed. Backup will be kavita.db in temp folder");
-                    var migrationDirectory = await GetMigrationDirectory(context, directoryService);
-                    directoryService.ExistOrCreate(migrationDirectory);
-
-                    if (!directoryService.FileSystem.File.Exists(
-                            directoryService.FileSystem.Path.Join(migrationDirectory, "kavita.db")))
+                    if (context.Database.IsSqlite())
                     {
-                        directoryService.CopyFileToDirectory(directoryService.FileSystem.Path.Join(directoryService.ConfigDirectory, "kavita.db"), migrationDirectory);
-                        logger.LogInformation("Database backed up to {MigrationDirectory}", migrationDirectory);
+                        logger.LogInformation("Performing backup as migrations are needed. Backup will be kavita.db in temp folder");
+                        var migrationDirectory = await GetMigrationDirectory(context, directoryService);
+                        directoryService.ExistOrCreate(migrationDirectory);
+
+                        if (!directoryService.FileSystem.File.Exists(
+                                directoryService.FileSystem.Path.Join(migrationDirectory, "kavita.db")))
+                        {
+                            directoryService.CopyFileToDirectory(directoryService.FileSystem.Path.Join(directoryService.ConfigDirectory, "kavita.db"), migrationDirectory);
+                            logger.LogInformation("Database backed up to {MigrationDirectory}", migrationDirectory);
+                        }
+                    }
+                    else
+                    {
+                        logger.LogWarning("Kavita will be performing migration, we highly recommend you set up your own backups");
                     }
                 }
 
@@ -135,10 +142,19 @@ public class Program
             {
                 var logger = services.GetRequiredService<ILogger<Program>>();
                 var context = services.GetRequiredService<DataContext>();
-                var migrationDirectory = await GetMigrationDirectory(context, directoryService);
 
-                logger.LogCritical(ex, "A migration failed during startup. Restoring backup from {MigrationDirectory} and exiting", migrationDirectory);
-                directoryService.CopyFileToDirectory(directoryService.FileSystem.Path.Join(migrationDirectory, "kavita.db"), directoryService.ConfigDirectory);
+                if (context.Database.IsSqlite())
+                {
+                    var migrationDirectory = await GetMigrationDirectory(context, directoryService);
+
+                    logger.LogCritical(ex, "A migration failed during startup. Restoring backup from {MigrationDirectory} and exiting", migrationDirectory);
+                    directoryService.CopyFileToDirectory(directoryService.FileSystem.Path.Join(migrationDirectory, "kavita.db"), directoryService.ConfigDirectory);
+
+                }
+                else
+                {
+                    logger.LogCritical("A migration failed during startup. Please restore the database from a backup before starting again");
+                }
 
                 return;
             }
@@ -221,7 +237,8 @@ public class Program
 
                 config.AddJsonFile("config/appsettings.json", optional: true, reloadOnChange: false)
                     .AddJsonFile($"config/appsettings.{env.EnvironmentName}.json",
-                        optional: true, reloadOnChange: false);
+                        optional: true, reloadOnChange: false)
+                    .AddEnvironmentVariables();
             })
             .ConfigureWebHostDefaults(webBuilder =>
             {

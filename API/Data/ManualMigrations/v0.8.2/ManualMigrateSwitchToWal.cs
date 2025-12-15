@@ -19,6 +19,8 @@ public static class ManualMigrateSwitchToWal
             return;
         }
 
+        if (!context.Database.IsSqlite()) return;
+
         logger.LogCritical("Running ManualMigrateSwitchToWal migration - Please be patient, this may take some time. This is not an error");
         try
         {

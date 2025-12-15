@@ -26,7 +26,7 @@ using Microsoft.EntityFrameworkCore.ChangeTracking;
 
 namespace API.Data;
 
-public sealed class DataContext : IdentityDbContext<AppUser, AppRole, int,
+public class DataContext : IdentityDbContext<AppUser, AppRole, int,
     IdentityUserClaim<int>, AppUserRole, IdentityUserLogin<int>,
     IdentityRoleClaim<int>, IdentityUserToken<int>>
 {
