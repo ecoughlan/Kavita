@@ -2090,7 +2090,10 @@
         "theme-dark": "Dark",
         "theme-black": "Black",
         "theme-white": "White",
-        "theme-paper": "Paper"
+        "theme-paper": "Paper",
+
+        "slow": "Slow",
+        "fast": "Fast"
     },
 
     "table-of-contents": {
@@ -2807,7 +2810,13 @@
         "key-bind-title-first-page": "First Page",
         "key-bind-tooltip-first-page": "Move to the first page",
         "key-bind-title-last-page": "Last Page",
-        "key-bind-tooltip-last-page": "Move to the last page"
+        "key-bind-tooltip-last-page": "Move to the last page",
+        "key-bind-title-toggle-blind-scroll": "Toggle blind scroll",
+        "key-bind-tooltip-toggle-blind-scroll": "Start or stop auto-scroll with moving reveal line",
+        "key-bind-title-blind-scroll-slower": "Blind scroll slower",
+        "key-bind-tooltip-blind-scroll-slower": "Decrease blind scroll speed while active",
+        "key-bind-title-blind-scroll-faster": "Blind scroll faster",
+        "key-bind-tooltip-blind-scroll-faster": "Increase blind scroll speed while active"
     },
 
     "cbl-manager": {
@@ -2960,7 +2969,6 @@
         "download": "Download",
         "owned-label": "Owned",
         "close": "{{common.close}}"
-
     },
 
     "collection-detail": {

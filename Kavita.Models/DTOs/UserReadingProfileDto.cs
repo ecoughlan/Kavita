@@ -125,7 +125,7 @@ public sealed record UserReadingProfileDto
     [Required]
     public bool BookReaderImmersiveMode { get; set; } = false;
 
-    /// <inheritdoc cref="Kavita.Models.Entities.User.AppUserReadingProfile.BookReaderImmersiveMode"/>
+    /// <inheritdoc cref="Kavita.Models.Entities.User.AppUserReadingProfile.BookReaderDisableBookmarkIcon"/>
     [Required]
     public bool BookReaderDisableBookmarkIcon { get; set; } = false;
 

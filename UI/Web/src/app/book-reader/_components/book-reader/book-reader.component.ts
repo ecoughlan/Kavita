@@ -87,6 +87,15 @@ interface HistoryPoint {
 
 type Container = {left: number, right: number, top: number, bottom: number, width: number, height: number};
 
+type ViewTransitionDocument = Document & {
+  startViewTransition?: (callback: () => void | Promise<void>) => {
+    ready: Promise<void>;
+    updateCallbackDone: Promise<void>;
+    finished: Promise<void>;
+    skipTransition: () => void;
+  };
+};
+
 const TOP_OFFSET = -(50 + 10) * 1.5; // px the sticky header takes up // TODO: Do I need this or can I change it with new fixed top height
 
 const COLUMN_GAP = 20; // px
@@ -119,6 +128,9 @@ const KEYBIND_TARGETS = [
   {keyBindTarget: KeyBindTarget.GoTo, description: 'go-to'},
   {keyBindTarget: KeyBindTarget.ToggleFullScreen},
   {keyBindTarget: KeyBindTarget.ToggleMenu},
+  {keyBindTarget: KeyBindTarget.ToggleBlindScroll},
+  {keyBindTarget: KeyBindTarget.BlindScrollSlower},
+  {keyBindTarget: KeyBindTarget.BlindScrollFaster},
   {keyBindTarget: KeyBindTarget.OpenHelp},
   {keyBindTarget: KeyBindTarget.Escape},
   {keyBindTarget: KeyBindTarget.PreviousChapter, description: 'previous-chapter'},
@@ -375,6 +387,21 @@ export class BookReaderComponent implements OnInit, AfterViewInit, OnDestroy {
    */
   delayedScrollEventTimeout: any = undefined;
 
+  blindScrollActive = signal(false);
+  blindScrollPaused = signal(false);
+  blindScrollSpeed = signal(15);
+  blindScrollBottomSpacerHeight = signal(0);
+  private blindScrollOperationId = 0;
+  private blindScrollRevealAnimation?: Animation;
+  private blindScrollLineAnimation?: Animation;
+  private blindScrollCycleBaseSpeed = 15;
+  private blindScrollLineElement?: HTMLElement;
+  private blindScrollSpeedFeedbackElement?: HTMLElement;
+  private blindScrollSpeedFeedbackStyleElement?: HTMLStyleElement;
+  private blindScrollSpeedFeedbackTimeout?: ReturnType<typeof setTimeout>;
+  private blindScrollPreviousImmersiveMode = false;
+  private blindScrollPreviousClickToPaginate = false;
+  private blindScrollPreviousActionBarVisible = false;
 
   readonly bookContainerElemRef = viewChild.required<ElementRef<HTMLDivElement>>('bookContainer');
   /**
@@ -474,7 +501,6 @@ export class BookReaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
     return (baseCondition || showForVerticalDefault || showWhenDefaultLayout) && otherCondition;
   });
-
 
   isNextPageDisabled() {
     const condition = (this.nextPageDisabled || this.nextChapterId === CHAPTER_ID_DOESNT_EXIST) && this.pageNum() + 1 > this.maxPages() - 1;
@@ -698,7 +724,20 @@ export class BookReaderComponent implements OnInit, AfterViewInit, OnDestroy {
             this.toggleFullscreen();
             break;
           case KeyBindTarget.ToggleMenu:
-            this.actionBarVisible.update(x => !x);
+            if (this.blindScrollActive()) {
+              this.toggleBlindScrollPause();
+            } else {
+              this.actionBarVisible.update(x => !x);
+            }
+            break;
+          case KeyBindTarget.ToggleBlindScroll:
+            this.toggleBlindScroll();
+            break;
+          case KeyBindTarget.BlindScrollSlower:
+            if (this.blindScrollActive()) this.adjustBlindScrollSpeed(-1);
+            break;
+          case KeyBindTarget.BlindScrollFaster:
+            if (this.blindScrollActive()) this.adjustBlindScrollSpeed(1);
             break;
           case KeyBindTarget.FirstPage:
             await this.goToPage(0);
@@ -744,10 +783,31 @@ export class BookReaderComponent implements OnInit, AfterViewInit, OnDestroy {
     fromEvent(this.reader().nativeElement, 'scroll')
       .pipe(
         debounceTime(200),
-        filter(_ => !this.isLoading()),
+        filter(_ => !this.isLoading() && !this.blindScrollActive()),
         tap(_ => this.handleScrollEvent()),
         takeUntilDestroyed(this.destroyRef))
       .subscribe();
+
+    fromEvent<KeyboardEvent>(this.document, 'keydown', {capture: true})
+      .pipe(
+        filter(() => this.blindScrollActive()),
+        filter(event => event.key === 'ArrowUp' || event.key === 'ArrowDown'),
+        takeUntilDestroyed(this.destroyRef),
+      )
+      .subscribe(event => {
+        const activeElement = this.document.activeElement as HTMLElement;
+        if (event.ctrlKey || event.altKey || event.metaKey) return;
+        if (activeElement.matches('input, textarea') || activeElement.isContentEditable || activeElement.closest('[contenteditable], .ql-editor')) return;
+
+        event.preventDefault();
+        event.stopImmediatePropagation();
+        const direction = event.key === 'ArrowUp' ? 1 : -1;
+        if (event.shiftKey) {
+          this.adjustBlindScrollProgress(-direction);
+        } else {
+          this.adjustBlindScrollSpeed(direction);
+        }
+      });
 
     const mouseMove$ = fromEvent<MouseEvent>(this.bookContainerElemRef().nativeElement, 'mousemove');
     const touchMove$ = fromEvent<TouchEvent>(this.bookContainerElemRef().nativeElement, 'touchmove');
@@ -845,6 +905,8 @@ export class BookReaderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy(): void {
+    this.stopBlindScroll();
+    this.document.getElementById('blind-scroll-view-transition-styles')?.remove();
     this.clearTimeout(this.clickToPaginateVisualOverlayTimeout);
     this.clearTimeout(this.clickToPaginateVisualOverlayTimeout2);
     this.clearTimeout(this.delayedScrollEventTimeout);
@@ -1044,6 +1106,8 @@ export class BookReaderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onResize(){
+    this.stopBlindScroll();
+
     // Update the window Height
     this.updateWidthAndHeightCalcs();
     this.updateImageSizes();
@@ -1084,6 +1148,11 @@ export class BookReaderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   onWheel(event: WheelEvent) {
+    // Block manual scroll during blind scroll
+    if (this.blindScrollActive()) {
+      event.preventDefault();
+      return;
+    }
     // This allows the user to scroll the page horizontally without holding shift
     if (this.layoutMode() !== BookPageLayoutMode.Default || this.writingStyle() !== WritingStyle.Vertical) {
       return;
@@ -1092,7 +1161,7 @@ export class BookReaderComponent implements OnInit, AfterViewInit, OnDestroy {
       event.preventDefault();
       this.scrollService.scrollToX(event.deltaY + this.reader().nativeElement.scrollLeft, this.reader().nativeElement);
     }
-}
+  }
 
   closeReader() {
     this.readerService.closeShortCutModal();
@@ -1120,6 +1189,7 @@ export class BookReaderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   loadNextChapter() {
+    this.stopBlindScroll();
     if (this.nextPageDisabled) { return; }
     this.isLoading.set(true);
 
@@ -1135,6 +1205,7 @@ export class BookReaderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   loadPrevChapter() {
+    this.stopBlindScroll();
     if (this.prevPageDisabled) { return; }
 
     this.isLoading.set(true);
@@ -1256,6 +1327,8 @@ export class BookReaderComponent implements OnInit, AfterViewInit, OnDestroy {
 
     if (page === undefined || this.pageNum() === page) { return; }
 
+    this.stopBlindScroll();
+
     if (page > this.maxPages()) {
       page = this.maxPages();
     } else if (page < 0) {
@@ -1266,42 +1339,55 @@ export class BookReaderComponent implements OnInit, AfterViewInit, OnDestroy {
     this.loadPage();
   }
 
-  loadPage(part?: string | undefined, scrollTop?: number | undefined) {
-
-    this.isLoading.set(true);
+  async loadPage(part?: string | undefined, scrollTop?: number | undefined, prefetchedContent?: string, showLoading = true): Promise<void> {
+    this.isLoading.set(showLoading);
     this.cdRef.markForCheck();
 
-    this.bookService.getBookPage(this.chapterId, this.pageNum()).subscribe(content => {
-      this.isSingleImagePage = this.checkSingleImagePage(content); // This needs be performed before we set this.page to avoid image jumping
-      this.updateSingleImagePageStyles();
+    try {
+      const content = prefetchedContent ?? await firstValueFrom(this.bookService.getBookPage(this.chapterId, this.pageNum()));
+      return await this.renderPage(content, part, scrollTop);
+    } catch (err) {
+      this.isLoading.set(false);
+      this.cdRef.markForCheck();
+      throw err;
+    }
+  }
 
-      this.page.set(this.domSanitizer.bypassSecurityTrustHtml(content));
+  private renderPage(content: string, part?: string, scrollTop?: number): Promise<void> {
+    this.isSingleImagePage = this.checkSingleImagePage(content); // This needs be performed before we set this.page to avoid image jumping
+    this.updateSingleImagePageStyles();
+    this.page.set(this.domSanitizer.bypassSecurityTrustHtml(content));
+    this.scrollService.unlock();
+    this.setupObservers();
 
-      this.scrollService.unlock();
-      this.setupObservers();
+    return new Promise<void>((resolve) => afterFrame(() => {
+      this.addLinkClickHandlers();
+      this.applyPageStyles(this.pageStyles());
 
-      afterFrame(() => {
-        this.addLinkClickHandlers();
-        this.applyPageStyles(this.pageStyles());
-
-        const imgs = this.readingSectionElemRef().nativeElement.querySelectorAll('img');
-        if (imgs !== null && imgs.length > 0) {
-          Promise.all(Array.from(imgs ?? [])
-            .filter(img => !img.complete)
-            .map(img => new Promise(resolve => { img.onload = img.onerror = resolve; })))
-            .then(() => {
-              this.setupPage(part, scrollTop);
-              this.updateImageSizes();
-              this.injectImageBookmarkIndicators();
-            });
-        } else {
-          this.setupPage(part, scrollTop);
-        }
-
-
+      const setup = () => {
+        this.setupPage(part, scrollTop);
+        this.updateImageSizes();
+        this.injectImageBookmarkIndicators();
         this.firstLoad = false;
-      });
-    });
+        resolve();
+      };
+
+      const imgs = this.readingSectionElemRef().nativeElement.querySelectorAll('img');
+      const loadingImages = Array.from(imgs).filter(img => !img.complete);
+      if (loadingImages.length > 0) {
+        Promise.all(loadingImages.map(img => new Promise<void>(resolveImg => {
+          const timeout = setTimeout(resolveImg, 5_000);
+          const done = () => {
+            clearTimeout(timeout);
+            resolveImg();
+          };
+          img.addEventListener('load', done, {once: true});
+          img.addEventListener('error', done, {once: true});
+        }))).then(setup);
+      } else {
+        setup();
+      }
+    }));
   }
 
   /**
@@ -1615,6 +1701,8 @@ export class BookReaderComponent implements OnInit, AfterViewInit, OnDestroy {
    * @param direction Direction to move
    */
   movePage(direction: PAGING_DIRECTION) {
+    this.stopBlindScroll();
+
     switch (direction) {
       case PAGING_DIRECTION.BACKWARDS:
         this.prevPage();
@@ -2109,7 +2197,6 @@ export class BookReaderComponent implements OnInit, AfterViewInit, OnDestroy {
         this.applyLayoutMode(res.object as BookPageLayoutMode, true);
         break;
       case "readingDirection":
-        // No extra functionality needs to be done
         break;
       case "immersiveMode":
         this.applyImmersiveMode(res.object as boolean);
@@ -2124,6 +2211,7 @@ export class BookReaderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   toggleDrawer() {
+    this.stopBlindScroll();
     const drawerIsOpen = this.epubMenuService.isDrawerOpen();
     if (drawerIsOpen) {
       this.epubMenuService.closeAll();
@@ -2372,6 +2460,13 @@ export class BookReaderComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   handleReaderClick(event: MouseEvent) {
+    if (this.blindScrollActive()) {
+      event.preventDefault();
+      event.stopPropagation();
+      this.toggleBlindScrollPause();
+      return;
+    }
+
     if (!this.clickToPaginate() && !this.immersiveMode()) {
       event.preventDefault();
       event.stopPropagation();
@@ -2635,6 +2730,340 @@ export class BookReaderComponent implements OnInit, AfterViewInit, OnDestroy {
     }
   }
 
+  toggleBlindScroll(): void {
+    if (this.blindScrollActive()) {
+      this.stopBlindScroll();
+      return;
+    }
+
+    if (!this.canUseBlindScroll()) {
+      return;
+    }
+
+    this.startBlindScroll();
+  }
+
+  private canUseBlindScroll(): boolean {
+    return this.layoutMode() === BookPageLayoutMode.Default &&
+           this.writingStyle() === WritingStyle.Horizontal &&
+           typeof (this.document as ViewTransitionDocument).startViewTransition === 'function';
+  }
+
+  private startBlindScroll(): void {
+    if (!this.canUseBlindScroll() || this.blindScrollActive()) return;
+
+    this.blindScrollPreviousImmersiveMode = this.immersiveMode();
+    this.blindScrollPreviousClickToPaginate = this.clickToPaginate();
+    this.blindScrollPreviousActionBarVisible = this.actionBarVisible();
+    if (!this.immersiveMode()) {
+      this.readerSettingsService.updateImmersiveMode(true);
+    }
+    this.actionBarVisible.set(false);
+    this.blindScrollSpeed.set(this.getStoredBlindScrollSpeed());
+    this.ensureBlindScrollTransitionStyles();
+    this.blindScrollLineElement = this.document.createElement('div');
+    this.blindScrollLineElement.className = 'blind-scroll-line';
+    this.blindScrollLineElement.setAttribute('aria-hidden', 'true');
+    this.document.body.appendChild(this.blindScrollLineElement);
+    this.blindScrollSpeedFeedbackElement = this.document.createElement('div');
+    this.blindScrollSpeedFeedbackElement.className = 'blind-scroll-speed-feedback';
+    this.blindScrollSpeedFeedbackElement.setAttribute('role', 'status');
+    this.blindScrollSpeedFeedbackElement.setAttribute('aria-live', 'polite');
+    this.document.body.appendChild(this.blindScrollSpeedFeedbackElement);
+
+    this.blindScrollOperationId++;
+    this.blindScrollActive.set(true);
+    this.blindScrollPaused.set(false);
+    const operationId = this.blindScrollOperationId;
+    afterFrame(() => {
+      if (!this.blindScrollActive() || operationId !== this.blindScrollOperationId) return;
+      this.updateWidthAndHeightCalcs();
+      void this.runBlindScroll(operationId);
+    });
+  }
+
+  private stopBlindScroll(): void {
+    const wasActive = this.blindScrollActive();
+    this.blindScrollOperationId++;
+    this.blindScrollActive.set(false);
+    this.blindScrollPaused.set(false);
+    this.blindScrollRevealAnimation?.cancel();
+    this.blindScrollLineAnimation?.cancel();
+    this.blindScrollRevealAnimation = undefined;
+    this.blindScrollLineAnimation = undefined;
+    this.blindScrollLineElement?.remove();
+    this.blindScrollLineElement = undefined;
+    clearTimeout(this.blindScrollSpeedFeedbackTimeout);
+    this.blindScrollSpeedFeedbackTimeout = undefined;
+    this.blindScrollSpeedFeedbackStyleElement?.remove();
+    this.blindScrollSpeedFeedbackStyleElement = undefined;
+    this.blindScrollSpeedFeedbackElement?.remove();
+    this.blindScrollSpeedFeedbackElement = undefined;
+    this.blindScrollBottomSpacerHeight.set(0);
+    if (wasActive) {
+      this.readerSettingsService.updateImmersiveMode(this.blindScrollPreviousImmersiveMode);
+      if (this.clickToPaginate() !== this.blindScrollPreviousClickToPaginate) {
+        this.readerSettingsService.updateClickToPaginate(this.blindScrollPreviousClickToPaginate);
+      }
+      this.actionBarVisible.set(this.blindScrollPreviousActionBarVisible);
+    }
+  }
+
+  private toggleBlindScrollPause(): void {
+    this.blindScrollPaused.update(p => !p);
+    if (this.blindScrollPaused()) {
+      this.blindScrollRevealAnimation?.pause();
+      this.blindScrollLineAnimation?.pause();
+    } else {
+      this.blindScrollRevealAnimation?.play();
+      this.blindScrollLineAnimation?.play();
+    }
+  }
+
+  private adjustBlindScrollSpeed(delta: number): void {
+    const currentSpeed = this.blindScrollSpeed();
+    const newSpeed = this.clampBlindScrollSpeed(currentSpeed + delta);
+    this.blindScrollSpeed.set(newSpeed);
+    localStorage.setItem('kavita.epub-reader.blind-scroll.speed', `${newSpeed}`);
+    const playbackRate = newSpeed / this.blindScrollCycleBaseSpeed;
+    this.blindScrollRevealAnimation?.updatePlaybackRate(playbackRate);
+    this.blindScrollLineAnimation?.updatePlaybackRate(playbackRate);
+    this.showBlindScrollSpeedFeedback(newSpeed);
+  }
+
+  private showBlindScrollSpeedFeedback(speed: number): void {
+    const feedback = this.blindScrollSpeedFeedbackElement;
+    if (!feedback) return;
+
+    feedback.textContent = `Speed: ${speed} px/sec`;
+    const svg = `<svg xmlns="http://www.w3.org/2000/svg" width="180" height="48"><rect width="180" height="48" rx="4" fill="#2f96b4"/><text x="16" y="30" fill="white" font-family="system-ui, sans-serif" font-size="16">Speed: ${speed} px/sec</text></svg>`;
+    if (!this.blindScrollSpeedFeedbackStyleElement) {
+      this.blindScrollSpeedFeedbackStyleElement = this.document.createElement('style');
+      this.document.head.appendChild(this.blindScrollSpeedFeedbackStyleElement);
+    }
+    this.blindScrollSpeedFeedbackStyleElement.textContent = `
+      ::view-transition-new(blind-scroll-speed-feedback) {
+        opacity: 1 !important;
+        background: url("data:image/svg+xml,${encodeURIComponent(svg)}") center / 100% 100% no-repeat !important;
+      }
+    `;
+    clearTimeout(this.blindScrollSpeedFeedbackTimeout);
+    this.blindScrollSpeedFeedbackTimeout = setTimeout(() => {
+      this.blindScrollSpeedFeedbackStyleElement?.remove();
+      this.blindScrollSpeedFeedbackStyleElement = undefined;
+      this.blindScrollSpeedFeedbackTimeout = undefined;
+    }, 1500);
+  }
+
+  private adjustBlindScrollProgress(direction: number): void {
+    const duration = this.blindScrollRevealAnimation?.effect?.getComputedTiming().duration;
+    if (typeof duration !== 'number') return;
+
+    const currentTime = Number(this.blindScrollRevealAnimation?.currentTime ?? 0);
+    const nextTime = Math.max(0, Math.min(duration, currentTime + direction * duration * 0.1));
+    this.blindScrollRevealAnimation!.currentTime = nextTime;
+    if (this.blindScrollLineAnimation) this.blindScrollLineAnimation.currentTime = nextTime;
+  }
+
+  private getBlindScrollStepHeight(viewportHeight: number): number {
+    const overlap = 0;
+    return Math.max(1, viewportHeight - overlap);
+  }
+
+  private async runBlindScroll(operationId: number): Promise<void> {
+    while (this.blindScrollActive() && operationId === this.blindScrollOperationId) {
+      const keepGoing = await this.runBlindScrollCycle(operationId).catch(err => {
+        console.error('Blind scroll failed', err);
+        this.stopBlindScroll();
+        return false;
+      });
+      if (!keepGoing) return;
+    }
+  }
+
+  private async runBlindScrollCycle(operationId: number): Promise<boolean> {
+    if (!this.reader()?.nativeElement) return false;
+
+    const reader = this.reader().nativeElement;
+    const viewportHeight = reader.clientHeight;
+    const stepHeight = this.getBlindScrollStepHeight(viewportHeight);
+    const naturalMaxScrollTop = Math.max(0, reader.scrollHeight - this.blindScrollBottomSpacerHeight() - reader.clientHeight);
+    const remaining = Math.max(0, naturalMaxScrollTop - reader.scrollTop);
+    const hasNextSection = this.pageNum() + 1 < this.maxPages();
+
+    let advance: () => void;
+    let finishAdvance: (() => Promise<void>) | undefined;
+    if (remaining <= 0) {
+      if (hasNextSection) {
+        this.blindScrollLineElement!.style.visibility = 'hidden';
+        const nextPage = this.pageNum() + 1;
+        const content = await firstValueFrom(this.bookService.getBookPage(this.chapterId, nextPage));
+        await this.preloadBlindScrollImages(content);
+        if (!this.blindScrollActive() || operationId !== this.blindScrollOperationId) return false;
+
+        let setupPromise: Promise<void> | undefined;
+        advance = () => {
+          this.blindScrollBottomSpacerHeight.set(0);
+          this.pageNum.set(nextPage);
+          setupPromise = this.loadPage(undefined, 0, content, false);
+          this.cdRef.detectChanges();
+          reader.scrollTop = 0;
+        };
+        finishAdvance = () => setupPromise ?? Promise.resolve();
+      } else {
+        this.stopBlindScroll();
+        this.loadNextChapter();
+        return false;
+      }
+    } else {
+      if (remaining < stepHeight) {
+        this.blindScrollBottomSpacerHeight.set(stepHeight - remaining);
+        this.cdRef.detectChanges();
+        await new Promise<void>(resolve => afterFrame(() => resolve()));
+      }
+
+      const nextScrollTop = reader.scrollTop + stepHeight;
+      advance = () => {
+        reader.scrollTop = nextScrollTop;
+      };
+    }
+
+    this.blindScrollLineElement!.style.visibility = '';
+    await this.revealBlindScrollAdvance(operationId, viewportHeight, advance, finishAdvance);
+    if (!this.blindScrollActive() || operationId !== this.blindScrollOperationId) return false;
+
+    this.handleScrollEvent();
+    return true;
+  }
+
+  private async revealBlindScrollAdvance(operationId: number, viewportHeight: number, advance: () => void, finishAdvance?: () => Promise<void>): Promise<void> {
+    this.blindScrollCycleBaseSpeed = this.blindScrollSpeed();
+    const duration = Math.max(1, Math.round(viewportHeight / this.blindScrollCycleBaseSpeed * 1000));
+    const doc = this.document as ViewTransitionDocument;
+    const root = this.document.documentElement;
+
+    try {
+      if (doc.startViewTransition) {
+        root.classList.add('blind-scroll-transition');
+        const transition = doc.startViewTransition(async () => {
+          advance();
+        });
+        await transition.ready;
+        if (!this.blindScrollActive() || operationId !== this.blindScrollOperationId) {
+          transition.skipTransition();
+          return;
+        }
+        await finishAdvance?.();
+        if (!this.blindScrollActive() || operationId !== this.blindScrollOperationId) {
+          transition.skipTransition();
+          return;
+        }
+
+        const animationOptions = {duration, easing: 'linear', fill: 'both'} as KeyframeAnimationOptions;
+        this.blindScrollRevealAnimation = root.animate([
+          {clipPath: 'inset(0 0 100% 0)'},
+          {clipPath: 'inset(0 0 0 0)'}
+        ], {...animationOptions, pseudoElement: '::view-transition-new(reader-viewport)'} as KeyframeAnimationOptions & {pseudoElement: string});
+
+        this.blindScrollLineAnimation = root.animate([
+          {transform: 'translateY(0)'},
+          {transform: `translateY(${viewportHeight}px)`}
+        ], {...animationOptions, pseudoElement: '::view-transition-new(blind-scroll-line)'} as KeyframeAnimationOptions & {pseudoElement: string});
+
+        const playbackRate = this.blindScrollSpeed() / this.blindScrollCycleBaseSpeed;
+        this.blindScrollRevealAnimation.updatePlaybackRate(playbackRate);
+        this.blindScrollLineAnimation?.updatePlaybackRate(playbackRate);
+
+        if (this.blindScrollPaused()) {
+          this.blindScrollRevealAnimation.pause();
+          this.blindScrollLineAnimation?.pause();
+        }
+
+        await Promise.all([
+          this.blindScrollRevealAnimation.finished.catch(() => undefined),
+          this.blindScrollLineAnimation?.finished.catch(() => undefined) ?? Promise.resolve(),
+          transition.finished.catch(() => undefined)
+        ]);
+      } else {
+        advance();
+        await finishAdvance?.();
+      }
+    } finally {
+      root.classList.remove('blind-scroll-transition');
+      this.blindScrollRevealAnimation = undefined;
+      this.blindScrollLineAnimation = undefined;
+    }
+  }
+
+  private getStoredBlindScrollSpeed(): number {
+    return this.clampBlindScrollSpeed(Number(localStorage.getItem('kavita.epub-reader.blind-scroll.speed')) || 15);
+  }
+
+  private clampBlindScrollSpeed(value: number): number {
+    return Math.max(1, Math.min(60, Math.round(value)));
+  }
+
+  private async preloadBlindScrollImages(content: string): Promise<void> {
+    const ImageCtor = this.document.defaultView?.Image;
+    if (!ImageCtor) return;
+
+    const parsed = new DOMParser().parseFromString(content, 'text/html');
+    const sources = [...new Set(Array.from(parsed.querySelectorAll('img[src]')).map(img => img.getAttribute('src')).filter((src): src is string => !!src))];
+    await Promise.all(sources.map(src => new Promise<void>(resolve => {
+      const timeout = setTimeout(resolve, 5_000);
+      const image = new ImageCtor();
+      image.onload = image.onerror = () => {
+        clearTimeout(timeout);
+        resolve();
+      };
+      image.src = new URL(src, this.document.baseURI).href;
+    })));
+  }
+
+  private ensureBlindScrollTransitionStyles(): void {
+    if (this.document.getElementById('blind-scroll-view-transition-styles')) return;
+
+    const style = this.document.createElement('style');
+    style.id = 'blind-scroll-view-transition-styles';
+    style.textContent = `
+      .blind-scroll-line {
+        position: fixed;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 1px;
+        background-color: var(--primary-color);
+        box-shadow: 0 0 2px var(--primary-color);
+        pointer-events: none;
+      }
+      .blind-scroll-speed-feedback {
+        position: fixed;
+        inset: 0.75rem 0.75rem auto auto;
+        width: 180px;
+        height: 48px;
+        margin: 0;
+        opacity: 0;
+        pointer-events: none;
+      }
+      .blind-scroll-transition .reader-container { view-transition-name: reader-viewport; }
+      .blind-scroll-transition .blind-scroll-line { view-transition-name: blind-scroll-line; }
+      .blind-scroll-transition .blind-scroll-speed-feedback { view-transition-name: blind-scroll-speed-feedback; }
+      ::view-transition-old(root), ::view-transition-new(root) { animation: none; }
+      ::view-transition-old(reader-viewport), ::view-transition-new(reader-viewport) {
+        animation: none;
+        mix-blend-mode: normal;
+        height: 100%;
+      }
+      ::view-transition-old(reader-viewport) { animation-name: none; z-index: 1; }
+      ::view-transition-new(reader-viewport) { z-index: 2; }
+      ::view-transition-old(blind-scroll-line), ::view-transition-new(blind-scroll-line) { animation: none; }
+      ::view-transition-old(blind-scroll-line) { opacity: 0; }
+      ::view-transition-new(blind-scroll-line) { z-index: 3; }
+      ::view-transition-group(blind-scroll-speed-feedback) { animation: none; z-index: 4; }
+      ::view-transition-old(blind-scroll-speed-feedback), ::view-transition-new(blind-scroll-speed-feedback) { animation: none; opacity: 0; }
+    `;
+    this.document.head.appendChild(style);
+  }
 
   protected readonly environment = environment;
   protected readonly ReadingDirection = ReadingDirection;

@@ -209,6 +209,7 @@ export class EpubReaderSettingsService {
         });
       }
     });
+
   }
 
 
@@ -280,7 +281,6 @@ export class EpubReaderSettingsService {
     this._clickToPaginate.set(profile.bookReaderTapToPaginate);
     this._layoutMode.set(profile.bookReaderLayoutMode);
     this._immersiveMode.set(profile.bookReaderImmersiveMode);
-
     // Set up page styles
     this._pageStyles.set(this.buildPageStyles(
       this.toCssFontFamily(profile.bookReaderFontFamily),
@@ -450,7 +450,8 @@ export class EpubReaderSettingsService {
       bookReaderLineSpacing: profile.bookReaderLineSpacing,
       bookReaderMargin: profile.bookReaderMargin,
       bookReaderLayoutMode: this._layoutMode(),
-      bookReaderImmersiveMode: this._immersiveMode()
+      bookReaderImmersiveMode: this._immersiveMode(),
+      bookReaderDisableBookmarkIcon: profile.bookReaderDisableBookmarkIcon,
     }, { emitEvent: false });
   }
 
@@ -581,11 +582,10 @@ export class EpubReaderSettingsService {
     });
 
     this.settingsForm.get('bookReaderDisableBookmarkIcon')?.valueChanges.pipe(
-     takeUntilDestroyed(this.destroyRef)
+      takeUntilDestroyed(this.destroyRef)
     ).subscribe((bookReaderDisableBookmarkIcon: boolean) => {
       this.settingUpdateSubject.next({ setting: 'bookReaderDisableBookmarkIcon', object: bookReaderDisableBookmarkIcon });
     });
-
 
     // Update implicit profile on form changes (debounced) - ONLY source of profile updates
     this.settingsForm.valueChanges.pipe(
@@ -657,7 +657,6 @@ export class EpubReaderSettingsService {
     data.bookReaderImmersiveMode = this._immersiveMode();
     data.bookReaderReadingDirection = this._readingDirection();
     data.bookReaderWritingStyle = this._writingStyle();
-
     const activeTheme = this._activeTheme();
     if (activeTheme) {
       data.bookReaderThemeName = activeTheme.name;

@@ -75,10 +75,12 @@ export enum KeyBindTarget {
   FirstPage = 'FirstPage',
   LastPage = 'LastPage',
   NavigateHome = 'NavigateHome',
+  ToggleBlindScroll = 'ToggleBlindScroll',
+  BlindScrollSlower = 'BlindScrollSlower',
+  BlindScrollFaster = 'BlindScrollFaster',
 }
 
 export interface OpdsPreferences {
   embedProgressIndicator: boolean;
   includeContinueFrom: boolean;
 }
-

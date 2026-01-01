@@ -133,6 +133,9 @@ export const DefaultKeyBinds: Readonly<Record<KeyBindTarget, KeyBind[]>> = {
   [KeyBindTarget.NextChapter]: [{key: KeyCode.ArrowRight, control: true, shift: true}],
   [KeyBindTarget.PreviousChapter]: [{key: KeyCode.ArrowLeft, control: true, shift: true}],
   [KeyBindTarget.NavigateHome]: [],
+  [KeyBindTarget.ToggleBlindScroll]: [{key: KeyCode.KeyL}],
+  [KeyBindTarget.BlindScrollSlower]: [{key: KeyCode.KeyJ}],
+  [KeyBindTarget.BlindScrollFaster]: [{key: KeyCode.KeyK}],
 } as const;
 
 type KeyBindGroup = {
@@ -173,6 +176,9 @@ export const KeyBindGroups: KeyBindGroup[] = [
       {target: KeyBindTarget.LastPage},
       {target: KeyBindTarget.PreviousChapter},
       {target: KeyBindTarget.NextChapter},
+      {target: KeyBindTarget.ToggleBlindScroll},
+      {target: KeyBindTarget.BlindScrollSlower},
+      {target: KeyBindTarget.BlindScrollFaster},
     ],
   }
 ];

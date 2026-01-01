@@ -48,6 +48,12 @@ export class KeybindSettingDescriptionPipe implements PipeTransform {
         return this.create('key-bind-title-last-page', 'key-bind-tooltip-last-page');
       case KeyBindTarget.NavigateHome:
         return this.create('key-bind-title-navigate-home', 'key-bind-tooltip-navigate-home');
+      case KeyBindTarget.ToggleBlindScroll:
+        return this.create('key-bind-title-toggle-blind-scroll', 'key-bind-tooltip-toggle-blind-scroll');
+      case KeyBindTarget.BlindScrollSlower:
+        return this.create('key-bind-title-blind-scroll-slower', 'key-bind-tooltip-blind-scroll-slower');
+      case KeyBindTarget.BlindScrollFaster:
+        return this.create('key-bind-title-blind-scroll-faster', 'key-bind-tooltip-blind-scroll-faster');
     }
   }
 

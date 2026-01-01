@@ -60,4 +60,13 @@ public enum KeyBindTarget
 
     [Description(nameof(NavigateHome))]
     NavigateHome = 18,
+
+    [Description(nameof(ToggleBlindScroll))]
+    ToggleBlindScroll = 19,
+
+    [Description(nameof(BlindScrollSlower))]
+    BlindScrollSlower = 20,
+
+    [Description(nameof(BlindScrollFaster))]
+    BlindScrollFaster = 21,
 }

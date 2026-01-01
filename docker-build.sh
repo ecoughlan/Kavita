@@ -23,7 +23,7 @@ Build()
 
     dotnet clean $slnFile -c Release
 
-	  dotnet msbuild -restore $slnFile -p:Configuration=Release -p:Platform="Any CPU" -p:RuntimeIdentifiers=$RID
+	  dotnet msbuild -p:AllowMissingPrunePackageData=true -restore $slnFile -p:Configuration=Release -p:Platform="Any CPU" -p:RuntimeIdentifiers=$RID
 
     ProgressEnd "Build for $RID"
 }
@@ -100,4 +100,4 @@ Package "linux-arm64"
 cd "$dir"
 
 #Builds Docker images
-docker buildx build -t kizaing/kavita:nightly --platform linux/amd64,linux/arm/v7,linux/arm64 . --push
+docker buildx build -t averell/kavita:custom-scroll-v1 --platform linux/amd64,linux/arm/v7,linux/arm64 . --push

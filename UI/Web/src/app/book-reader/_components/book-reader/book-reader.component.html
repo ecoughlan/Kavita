@@ -18,7 +18,7 @@
       }
     </div>
 
-    @if (clickToPaginate() && !hidePagination()) {
+    @if (clickToPaginate() && !hidePagination() && !blindScrollActive()) {
       <div class="tap-to-paginate">
         <div class="left {{clickOverlayClass('left')}} no-observe"
             (click)="movePage(isLeftToRight ? PAGING_DIRECTION.BACKWARDS : PAGING_DIRECTION.FORWARD)"
@@ -39,10 +39,14 @@
             [ngClass]="{'immersive' : immersiveMode()}"
             (mousedown)="mouseDown($event)" >
 
-        <div #readingHtml class="book-content {{layoutMode() | columnLayoutClass}} {{writingStyle() | writingStyleClass}}"
-             [ngStyle]="{'max-height': columnHeight(), 'max-width': verticalBookContentWidth(), 'width': verticalBookContentWidth(), 'column-width': columnWidth(), 'padding-bottom': bookContentPaddingBottom()}"
-             [ngClass]="{'immersive': immersiveMode() && actionBarVisible, 'debug': debugMode()}"
-             [innerHtml]="page()" (click)="toggleMenu($event)" (mousedown)="mouseDown($event)" (wheel)="onWheel($event)"></div>
+         <div #readingHtml class="book-content {{layoutMode() | columnLayoutClass}} {{writingStyle() | writingStyleClass}}"
+              [ngStyle]="{'max-height': columnHeight(), 'max-width': verticalBookContentWidth(), 'width': verticalBookContentWidth(), 'column-width': columnWidth(), 'padding-bottom': bookContentPaddingBottom()}"
+              [ngClass]="{'immersive': immersiveMode() && actionBarVisible, 'debug': debugMode()}"
+              [innerHtml]="page()" (click)="toggleMenu($event)" (mousedown)="mouseDown($event)" (wheel)="onWheel($event)"></div>
+
+          @if (blindScrollActive()) {
+            <div class="blind-scroll-bottom-spacer" [style.height.px]="blindScrollBottomSpacerHeight()"></div>
+          }
 
           @if (shouldShowBottomActionBar()) {
             <div class="bottom-bar" (click)="$event.stopPropagation();">
