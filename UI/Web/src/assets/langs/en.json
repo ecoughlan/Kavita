@@ -2090,10 +2090,7 @@
         "theme-dark": "Dark",
         "theme-black": "Black",
         "theme-white": "White",
-        "theme-paper": "Paper",
-
-        "slow": "Slow",
-        "fast": "Fast"
+        "theme-paper": "Paper"
     },
 
     "table-of-contents": {
@@ -2969,6 +2966,7 @@
         "download": "Download",
         "owned-label": "Owned",
         "close": "{{common.close}}"
+
     },
 
     "collection-detail": {
